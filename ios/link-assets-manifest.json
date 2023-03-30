@@ -1,0 +1,73 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Alkatra-Bold.ttf",
+      "sha1": "091f359796a11546e5492aeafefd582b1c6267b7"
+    },
+    {
+      "path": "src/assets/fonts/Alkatra-Medium.ttf",
+      "sha1": "546c105063c2530c3115a02f4fdcfddb6ebdd304"
+    },
+    {
+      "path": "src/assets/fonts/Alkatra-Regular.ttf",
+      "sha1": "4d69ea1bbf0cb4f277177046543a595d6401802b"
+    },
+    {
+      "path": "src/assets/fonts/Alkatra-SemiBold.ttf",
+      "sha1": "bf71b4bfa4ff217e8bf72dd1efe56d46d5860a27"
+    },
+    {
+      "path": "src/assets/fonts/Alkatra-VariableFont_wght.ttf",
+      "sha1": "b82c5927d2c0898ec0a279b85c4488fd8c120c22"
+    },
+    {
+      "path": "src/assets/fonts/EduNSWACTFoundation-Bold.ttf",
+      "sha1": "324c8bd20942de4a0b2514a90073499daa5c7451"
+    },
+    {
+      "path": "src/assets/fonts/EduNSWACTFoundation-Medium.ttf",
+      "sha1": "522572fcc135e42191e7ecc1fb46693b068bf3bf"
+    },
+    {
+      "path": "src/assets/fonts/EduNSWACTFoundation-Regular.ttf",
+      "sha1": "117ec02e510912ac57a24272ff1669b9fac26b19"
+    },
+    {
+      "path": "src/assets/fonts/EduNSWACTFoundation-SemiBold.ttf",
+      "sha1": "20cade6393c713d02991f9d39993d2be4881e98c"
+    },
+    {
+      "path": "src/assets/fonts/Lora-Bold.ttf",
+      "sha1": "6181c8c5c0046d8f9a484293108a27bba37618de"
+    },
+    {
+      "path": "src/assets/fonts/Lora-BoldItalic.ttf",
+      "sha1": "25f9b29ad281cc336e35c516b6d2c73da4e149d9"
+    },
+    {
+      "path": "src/assets/fonts/Lora-Italic.ttf",
+      "sha1": "d73f87c37abe1130d87be288cca54f4887dc17a7"
+    },
+    {
+      "path": "src/assets/fonts/Lora-Medium.ttf",
+      "sha1": "75a72ab8c80d696a517f4245c837011646756290"
+    },
+    {
+      "path": "src/assets/fonts/Lora-MediumItalic.ttf",
+      "sha1": "e13875499470c43930048db1724d65c5ed86971a"
+    },
+    {
+      "path": "src/assets/fonts/Lora-Regular.ttf",
+      "sha1": "d4178fd9d41a324df797c06803fb0aeba8fbacd4"
+    },
+    {
+      "path": "src/assets/fonts/Lora-SemiBold.ttf",
+      "sha1": "a65c10e353bfd67b7aaba44498063bfc71e829d8"
+    },
+    {
+      "path": "src/assets/fonts/Lora-SemiBoldItalic.ttf",
+      "sha1": "27403b82ee87deac15f4fca41dd88e36383faadd"
+    }
+  ]
+}
