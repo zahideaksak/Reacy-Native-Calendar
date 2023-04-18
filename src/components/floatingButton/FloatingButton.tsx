@@ -1,5 +1,7 @@
 import React, {FC} from 'react';
-import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import {TouchableOpacity} from 'react-native';
+import {icons} from '../../assets/icons';
+import Icon from '../icon';
 import {styles} from './styled';
 
 interface IButtonProps {
@@ -8,10 +10,11 @@ interface IButtonProps {
 
 export const FloatingButton: FC<IButtonProps> = ({onPress}) => {
   return (
-    <TouchableWithoutFeedback onPress={onPress}>
-      <View style={styles.container}>
-        <Text style={styles.icon}>+</Text>
-      </View>
-    </TouchableWithoutFeedback>
+    <TouchableOpacity
+      activeOpacity={0.8}
+      onPress={onPress}
+      style={styles.addBtnMain}>
+      <Icon name="add" path={icons.add} size={35} />
+    </TouchableOpacity>
   );
 };

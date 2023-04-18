@@ -5,7 +5,7 @@ import {styles} from './styled';
 export const SplashScreen: FC<any> = ({navigation}) => {
   setTimeout(() => {
     navigation.navigate('CalendarScreen');
-  }, 8000);
+  }, 1000);
   return (
     <View style={styles.container}>
       <Text style={styles.textTitle}>Smart Agenda</Text>

@@ -8,28 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* SmartAgendaTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* SmartAgendaTests.m */; };
+		04870BC2770D45ADABA4DAEF /* EduNSWACTFoundation-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4D70A939FA14DBBAC353193 /* EduNSWACTFoundation-Regular.ttf */; };
 		0C80B921A6F3F58F76C31292 /* libPods-SmartAgenda.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DCACB8F33CDC322A6C60F78 /* libPods-SmartAgenda.a */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.mm */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		2A357AD9BC444B0F85183535 /* Alkatra-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A95876339664D969C95BFB9 /* Alkatra-Regular.ttf */; };
+		30141F5E3AF44B2CAEDDE966 /* Alkatra-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54D72B55BC6B4D64B3AD95BC /* Alkatra-VariableFont_wght.ttf */; };
+		553BD09AD2E645CB8AFEDE11 /* Alkatra-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFD0EBE28F7149C688BD4CDF /* Alkatra-SemiBold.ttf */; };
+		55E3DE34FF59455299691AC2 /* EduNSWACTFoundation-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DBF0A61AED14117B024094E /* EduNSWACTFoundation-Bold.ttf */; };
+		6622EFF260AE463594B58926 /* Alkatra-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1C9C52ACD84407C810396FC /* Alkatra-Medium.ttf */; };
 		7699B88040F8A987B510C191 /* libPods-SmartAgenda-SmartAgendaTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 19F6CBCC0A4E27FBF8BF4A61 /* libPods-SmartAgenda-SmartAgendaTests.a */; };
+		789DD4377E39421BBD859976 /* Lora-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53F727AB8CE14FA988F65D46 /* Lora-Medium.ttf */; };
+		7ACC39AF5BA343D4B0D862AF /* Lora-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D1EBDC8995C44089D5E6385 /* Lora-Bold.ttf */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		855A500DB0BC4ACD947554D1 /* Alkatra-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D354FD564864DC9903281FA /* Alkatra-Bold.ttf */; };
-		6622EFF260AE463594B58926 /* Alkatra-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E1C9C52ACD84407C810396FC /* Alkatra-Medium.ttf */; };
-		2A357AD9BC444B0F85183535 /* Alkatra-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7A95876339664D969C95BFB9 /* Alkatra-Regular.ttf */; };
-		553BD09AD2E645CB8AFEDE11 /* Alkatra-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFD0EBE28F7149C688BD4CDF /* Alkatra-SemiBold.ttf */; };
-		30141F5E3AF44B2CAEDDE966 /* Alkatra-VariableFont_wght.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 54D72B55BC6B4D64B3AD95BC /* Alkatra-VariableFont_wght.ttf */; };
-		55E3DE34FF59455299691AC2 /* EduNSWACTFoundation-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DBF0A61AED14117B024094E /* EduNSWACTFoundation-Bold.ttf */; };
-		E4A0FC5845624474B01CEDC1 /* EduNSWACTFoundation-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B3A31736A68452DAD5C7383 /* EduNSWACTFoundation-Medium.ttf */; };
-		04870BC2770D45ADABA4DAEF /* EduNSWACTFoundation-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D4D70A939FA14DBBAC353193 /* EduNSWACTFoundation-Regular.ttf */; };
-		9EAAF534027B4CED86D83214 /* EduNSWACTFoundation-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32D95445F08F4D0780B6BDCB /* EduNSWACTFoundation-SemiBold.ttf */; };
-		7ACC39AF5BA343D4B0D862AF /* Lora-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8D1EBDC8995C44089D5E6385 /* Lora-Bold.ttf */; };
-		DCCD19033A064386B8E5BB8D /* Lora-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B9E274C7EE444C1A1E58C80 /* Lora-BoldItalic.ttf */; };
 		9AB76C468C37435EB2F949EA /* Lora-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8DCE1BCF15474B74A4ED284D /* Lora-Italic.ttf */; };
-		789DD4377E39421BBD859976 /* Lora-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 53F727AB8CE14FA988F65D46 /* Lora-Medium.ttf */; };
-		E848AD7E699442A3AD2B1CB7 /* Lora-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75157981C7EC49A08F7252C2 /* Lora-MediumItalic.ttf */; };
-		DB64D2A2A73241FF8DB4C859 /* Lora-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 500B3CE2E2FA4EBFBC4D6F45 /* Lora-Regular.ttf */; };
+		9EAAF534027B4CED86D83214 /* EduNSWACTFoundation-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 32D95445F08F4D0780B6BDCB /* EduNSWACTFoundation-SemiBold.ttf */; };
 		B3FD009C9B1F44CCBB2D400C /* Lora-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 128F8136052A4772964D0982 /* Lora-SemiBold.ttf */; };
+		DB64D2A2A73241FF8DB4C859 /* Lora-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 500B3CE2E2FA4EBFBC4D6F45 /* Lora-Regular.ttf */; };
+		DCCD19033A064386B8E5BB8D /* Lora-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6B9E274C7EE444C1A1E58C80 /* Lora-BoldItalic.ttf */; };
+		E4A0FC5845624474B01CEDC1 /* EduNSWACTFoundation-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1B3A31736A68452DAD5C7383 /* EduNSWACTFoundation-Medium.ttf */; };
+		E848AD7E699442A3AD2B1CB7 /* Lora-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 75157981C7EC49A08F7252C2 /* Lora-MediumItalic.ttf */; };
 		EEB0A80F36A74234BA015784 /* Lora-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB3718E1B31C49F4BFAC16DA /* Lora-SemiBoldItalic.ttf */; };
 /* End PBXBuildFile section */
 
@@ -47,6 +47,8 @@
 		00E356EE1AD99517003FC87E /* SmartAgendaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SmartAgendaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		00E356F11AD99517003FC87E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		00E356F21AD99517003FC87E /* SmartAgendaTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SmartAgendaTests.m; sourceTree = "<group>"; };
+		0D354FD564864DC9903281FA /* Alkatra-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Alkatra-Bold.ttf"; path = "../src/assets/fonts/Alkatra-Bold.ttf"; sourceTree = "<group>"; };
+		128F8136052A4772964D0982 /* Lora-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-SemiBold.ttf"; path = "../src/assets/fonts/Lora-SemiBold.ttf"; sourceTree = "<group>"; };
 		13B07F961A680F5B00A75B9A /* SmartAgenda.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SmartAgenda.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		13B07FAF1A68108700A75B9A /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = SmartAgenda/AppDelegate.h; sourceTree = "<group>"; };
 		13B07FB01A68108700A75B9A /* AppDelegate.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; name = AppDelegate.mm; path = SmartAgenda/AppDelegate.mm; sourceTree = "<group>"; };
@@ -54,30 +56,28 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = SmartAgenda/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = SmartAgenda/main.m; sourceTree = "<group>"; };
 		19F6CBCC0A4E27FBF8BF4A61 /* libPods-SmartAgenda-SmartAgendaTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartAgenda-SmartAgendaTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1B3A31736A68452DAD5C7383 /* EduNSWACTFoundation-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "EduNSWACTFoundation-Medium.ttf"; path = "../src/assets/fonts/EduNSWACTFoundation-Medium.ttf"; sourceTree = "<group>"; };
+		32D95445F08F4D0780B6BDCB /* EduNSWACTFoundation-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "EduNSWACTFoundation-SemiBold.ttf"; path = "../src/assets/fonts/EduNSWACTFoundation-SemiBold.ttf"; sourceTree = "<group>"; };
 		3B4392A12AC88292D35C810B /* Pods-SmartAgenda.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartAgenda.debug.xcconfig"; path = "Target Support Files/Pods-SmartAgenda/Pods-SmartAgenda.debug.xcconfig"; sourceTree = "<group>"; };
+		500B3CE2E2FA4EBFBC4D6F45 /* Lora-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-Regular.ttf"; path = "../src/assets/fonts/Lora-Regular.ttf"; sourceTree = "<group>"; };
+		53F727AB8CE14FA988F65D46 /* Lora-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-Medium.ttf"; path = "../src/assets/fonts/Lora-Medium.ttf"; sourceTree = "<group>"; };
+		54D72B55BC6B4D64B3AD95BC /* Alkatra-VariableFont_wght.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Alkatra-VariableFont_wght.ttf"; path = "../src/assets/fonts/Alkatra-VariableFont_wght.ttf"; sourceTree = "<group>"; };
 		5709B34CF0A7D63546082F79 /* Pods-SmartAgenda.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartAgenda.release.xcconfig"; path = "Target Support Files/Pods-SmartAgenda/Pods-SmartAgenda.release.xcconfig"; sourceTree = "<group>"; };
 		5B7EB9410499542E8C5724F5 /* Pods-SmartAgenda-SmartAgendaTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartAgenda-SmartAgendaTests.debug.xcconfig"; path = "Target Support Files/Pods-SmartAgenda-SmartAgendaTests/Pods-SmartAgenda-SmartAgendaTests.debug.xcconfig"; sourceTree = "<group>"; };
 		5DCACB8F33CDC322A6C60F78 /* libPods-SmartAgenda.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SmartAgenda.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6B9E274C7EE444C1A1E58C80 /* Lora-BoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-BoldItalic.ttf"; path = "../src/assets/fonts/Lora-BoldItalic.ttf"; sourceTree = "<group>"; };
+		75157981C7EC49A08F7252C2 /* Lora-MediumItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-MediumItalic.ttf"; path = "../src/assets/fonts/Lora-MediumItalic.ttf"; sourceTree = "<group>"; };
+		7A95876339664D969C95BFB9 /* Alkatra-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Alkatra-Regular.ttf"; path = "../src/assets/fonts/Alkatra-Regular.ttf"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = SmartAgenda/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		89C6BE57DB24E9ADA2F236DE /* Pods-SmartAgenda-SmartAgendaTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SmartAgenda-SmartAgendaTests.release.xcconfig"; path = "Target Support Files/Pods-SmartAgenda-SmartAgendaTests/Pods-SmartAgenda-SmartAgendaTests.release.xcconfig"; sourceTree = "<group>"; };
+		8D1EBDC8995C44089D5E6385 /* Lora-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-Bold.ttf"; path = "../src/assets/fonts/Lora-Bold.ttf"; sourceTree = "<group>"; };
+		8DBF0A61AED14117B024094E /* EduNSWACTFoundation-Bold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "EduNSWACTFoundation-Bold.ttf"; path = "../src/assets/fonts/EduNSWACTFoundation-Bold.ttf"; sourceTree = "<group>"; };
+		8DCE1BCF15474B74A4ED284D /* Lora-Italic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-Italic.ttf"; path = "../src/assets/fonts/Lora-Italic.ttf"; sourceTree = "<group>"; };
+		AB3718E1B31C49F4BFAC16DA /* Lora-SemiBoldItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Lora-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Lora-SemiBoldItalic.ttf"; sourceTree = "<group>"; };
+		D4D70A939FA14DBBAC353193 /* EduNSWACTFoundation-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "EduNSWACTFoundation-Regular.ttf"; path = "../src/assets/fonts/EduNSWACTFoundation-Regular.ttf"; sourceTree = "<group>"; };
+		DFD0EBE28F7149C688BD4CDF /* Alkatra-SemiBold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Alkatra-SemiBold.ttf"; path = "../src/assets/fonts/Alkatra-SemiBold.ttf"; sourceTree = "<group>"; };
+		E1C9C52ACD84407C810396FC /* Alkatra-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = undefined; includeInIndex = 0; lastKnownFileType = unknown; name = "Alkatra-Medium.ttf"; path = "../src/assets/fonts/Alkatra-Medium.ttf"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
-		0D354FD564864DC9903281FA /* Alkatra-Bold.ttf */ = {isa = PBXFileReference; name = "Alkatra-Bold.ttf"; path = "../src/assets/fonts/Alkatra-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		E1C9C52ACD84407C810396FC /* Alkatra-Medium.ttf */ = {isa = PBXFileReference; name = "Alkatra-Medium.ttf"; path = "../src/assets/fonts/Alkatra-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		7A95876339664D969C95BFB9 /* Alkatra-Regular.ttf */ = {isa = PBXFileReference; name = "Alkatra-Regular.ttf"; path = "../src/assets/fonts/Alkatra-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		DFD0EBE28F7149C688BD4CDF /* Alkatra-SemiBold.ttf */ = {isa = PBXFileReference; name = "Alkatra-SemiBold.ttf"; path = "../src/assets/fonts/Alkatra-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		54D72B55BC6B4D64B3AD95BC /* Alkatra-VariableFont_wght.ttf */ = {isa = PBXFileReference; name = "Alkatra-VariableFont_wght.ttf"; path = "../src/assets/fonts/Alkatra-VariableFont_wght.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8DBF0A61AED14117B024094E /* EduNSWACTFoundation-Bold.ttf */ = {isa = PBXFileReference; name = "EduNSWACTFoundation-Bold.ttf"; path = "../src/assets/fonts/EduNSWACTFoundation-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		1B3A31736A68452DAD5C7383 /* EduNSWACTFoundation-Medium.ttf */ = {isa = PBXFileReference; name = "EduNSWACTFoundation-Medium.ttf"; path = "../src/assets/fonts/EduNSWACTFoundation-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		D4D70A939FA14DBBAC353193 /* EduNSWACTFoundation-Regular.ttf */ = {isa = PBXFileReference; name = "EduNSWACTFoundation-Regular.ttf"; path = "../src/assets/fonts/EduNSWACTFoundation-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		32D95445F08F4D0780B6BDCB /* EduNSWACTFoundation-SemiBold.ttf */ = {isa = PBXFileReference; name = "EduNSWACTFoundation-SemiBold.ttf"; path = "../src/assets/fonts/EduNSWACTFoundation-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8D1EBDC8995C44089D5E6385 /* Lora-Bold.ttf */ = {isa = PBXFileReference; name = "Lora-Bold.ttf"; path = "../src/assets/fonts/Lora-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		6B9E274C7EE444C1A1E58C80 /* Lora-BoldItalic.ttf */ = {isa = PBXFileReference; name = "Lora-BoldItalic.ttf"; path = "../src/assets/fonts/Lora-BoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		8DCE1BCF15474B74A4ED284D /* Lora-Italic.ttf */ = {isa = PBXFileReference; name = "Lora-Italic.ttf"; path = "../src/assets/fonts/Lora-Italic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		53F727AB8CE14FA988F65D46 /* Lora-Medium.ttf */ = {isa = PBXFileReference; name = "Lora-Medium.ttf"; path = "../src/assets/fonts/Lora-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		75157981C7EC49A08F7252C2 /* Lora-MediumItalic.ttf */ = {isa = PBXFileReference; name = "Lora-MediumItalic.ttf"; path = "../src/assets/fonts/Lora-MediumItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		500B3CE2E2FA4EBFBC4D6F45 /* Lora-Regular.ttf */ = {isa = PBXFileReference; name = "Lora-Regular.ttf"; path = "../src/assets/fonts/Lora-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		128F8136052A4772964D0982 /* Lora-SemiBold.ttf */ = {isa = PBXFileReference; name = "Lora-SemiBold.ttf"; path = "../src/assets/fonts/Lora-SemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
-		AB3718E1B31C49F4BFAC16DA /* Lora-SemiBoldItalic.ttf */ = {isa = PBXFileReference; name = "Lora-SemiBoldItalic.ttf"; path = "../src/assets/fonts/Lora-SemiBoldItalic.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,19 +172,8 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				3B4392A12AC88292D35C810B /* Pods-SmartAgenda.debug.xcconfig */,
-				5709B34CF0A7D63546082F79 /* Pods-SmartAgenda.release.xcconfig */,
-				5B7EB9410499542E8C5724F5 /* Pods-SmartAgenda-SmartAgendaTests.debug.xcconfig */,
-				89C6BE57DB24E9ADA2F236DE /* Pods-SmartAgenda-SmartAgendaTests.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 		B9FDA12751C2470781708B30 /* Resources */ = {
-			isa = "PBXGroup";
+			isa = PBXGroup;
 			children = (
 				0D354FD564864DC9903281FA /* Alkatra-Bold.ttf */,
 				E1C9C52ACD84407C810396FC /* Alkatra-Medium.ttf */,
@@ -205,8 +194,19 @@
 				AB3718E1B31C49F4BFAC16DA /* Lora-SemiBoldItalic.ttf */,
 			);
 			name = Resources;
-			sourceTree = "<group>";
 			path = "";
+			sourceTree = "<group>";
+		};
+		BBD78D7AC51CEA395F1C20DB /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3B4392A12AC88292D35C810B /* Pods-SmartAgenda.debug.xcconfig */,
+				5709B34CF0A7D63546082F79 /* Pods-SmartAgenda.release.xcconfig */,
+				5B7EB9410499542E8C5724F5 /* Pods-SmartAgenda-SmartAgendaTests.debug.xcconfig */,
+				89C6BE57DB24E9ADA2F236DE /* Pods-SmartAgenda-SmartAgendaTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
