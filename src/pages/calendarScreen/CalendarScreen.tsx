@@ -6,7 +6,6 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
-  Modal,
 } from 'react-native';
 import {styles} from './styled';
 import theme from '../../assets/theme';
@@ -20,24 +19,25 @@ import DateTimePicker from '@react-native-community/datetimepicker';
 import {AddTaskModal} from '../../modal/addTaskModal';
 import {icons} from '../../assets/icons';
 import moment from 'moment';
-import CustomDateInput from './custom';
 
-const thisMonthStamp = 1664627943;
+// const thisMonthStamp = 1664627943;
 const timelineHeight = hourList.length * 41;
 const today = new Date();
 
 export const CalendarScreen: FC<any> = () => {
   const month = moment().format('MMMM');
-  const test = moment();
-  console.log('mom', test.daysInMonth());
+  //const test = moment();
+  //console.log('mom', test.daysInMonth());
   const [pickDate, setPickDate] = useState(false);
   const [monthText, setMonthText] = useState(month);
-  const [days, setDays] = useState(calendarDummyDates);
+  const [days, setDays] = useState<any>(calendarDummyDates);
   const [selectedDate, setSelectedDate] = useState<string>();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  function handleModalVisible() {
-    setModalVisible(!modalVisible);
-  }
+  const [tasks, setTasks] = useState<any[]>([]);
+  // function handleModalVisible() {
+  //   setModalVisible(!modalVisible);
+  // }
+  console.log('days', days);
 
   useEffect(() => {
     let array = [];
@@ -51,18 +51,31 @@ export const CalendarScreen: FC<any> = () => {
   let timelineHeader = useRef<FlatList | null>(null);
   let timeLineContent: any;
 
-  // const onTimeLineScroll = () => {
-  //   timelineHeader.scrollToOffset({
-  //     offset: 0,
-  //     animated: true,
-  //   });
-  // };
   const onTimeLineScroll = (contentOffset: any) => {
     timelineHeader?.current?.scrollToOffset({
-      offset: contentOffset.x,
+      offset: contentOffset.nativeEvent.contentOffset.x,
       animated: false,
     });
   };
+
+  useEffect(() => {
+    let newDays;
+    const filteredTasks = tasks.filter(
+      x =>
+        moment(x.selectedDate).format('YYYY') === '2023' &&
+        moment(x.selectedDate).format('MMMM') === month,
+    );
+    newDays = days.map(dayData => {
+      return {
+        ...dayData,
+        data: filteredTasks.filter(
+          task =>
+            parseInt(moment(task.selectedDate).format('DD')) === dayData.day,
+        ),
+      };
+    });
+    setDays(newDays);
+  }, [tasks]);
 
   // const handleAddTask = (time: {hr: number}, index: number) => {
   //   const monthDay = days[index];
@@ -88,22 +101,15 @@ export const CalendarScreen: FC<any> = () => {
   //   // );
   // };
 
-  const handleSelectDate = ({
-    type,
-    nativeEvent,
-  }: {
-    type: any;
-    nativeEvent: any;
-  }) => {
+  const handleSelectDate = ({nativeEvent}: {nativeEvent: any; type: any}) => {
     setPickDate(false);
     let selectedTimeStamp = new Date(nativeEvent.timestamp);
-    setSelectedDate(moment(selectedTimeStamp).format('MMM DD'));
+    setSelectedDate(moment(selectedTimeStamp).format());
     // if (type === 'set') {
-    //   let dateToAdd = new Date(nativeEvent.timestamp);
-    //   let startHr = dateToAdd.getHours();
-    //   let startMin = dateToAdd.getMinutes();
-    //   let endHr = dateToAdd.getHours() + 1;
-    //   let endMin = dateToAdd.getMinutes();
+    //   let startHr = selectedTimeStamp.getHours();
+    //   let startMin = selectedTimeStamp.getMinutes();
+    //   let endHr = selectedTimeStamp.getHours() + 1;
+    //   let endMin = selectedTimeStamp.getMinutes();
     //   if (addTaskModal.current) {
     //     addTaskModal.current?.show(
     //       {
@@ -126,9 +132,7 @@ export const CalendarScreen: FC<any> = () => {
     setPickDate(true);
   };
 
-  const addTask = () => {
-    console.log('');
-  };
+  // const addTask = () => {};
 
   return (
     <SafeAreaView>
@@ -152,36 +156,13 @@ export const CalendarScreen: FC<any> = () => {
                 size={14}
               />
             </View>
-            <View style={styles.headerIconCover}>
-              <Icon
-                name="search"
-                size={26}
-                path={icons.search}
-                color={theme.grey}
-              />
-            </View>
-            <View style={styles.headerIconCover}>
-              <Icon
-                name="calendar"
-                path={icons.calendar}
-                size={26}
-                color={theme.grey}
-              />
-            </View>
-            <View style={styles.headerIconCover}>
-              <Icon
-                name="more"
-                path={icons.more}
-                size={26}
-                color={theme.grey}
-              />
-            </View>
           </View>
 
           <FlatList
             horizontal
             data={days} // anlamadım
             ref={timelineHeader}
+            scrollToOffset={TimelineHeader}
             scrollEnabled={false}
             renderItem={TimelineHeader}
             keyExtractor={item => 'TimelineHeader' + item.day.toString()}
@@ -200,35 +181,46 @@ export const CalendarScreen: FC<any> = () => {
                 ref={timeLineContent}
                 onScroll={onTimeLineScroll}
                 contentContainerStyle={{height: timelineHeight}}
-                keyExtractor={item => 'timeLineContent' + item.day.toString()}
+                keyExtractor={item => {
+                  console.log('item', item);
+                  return 'timeLineContent' + item?.day?.toString();
+                }}
                 renderItem={TimelineContent}
               />
             </View>
           </View>
         </ScrollView>
-        {/* <AddTaskModal ref={addTaskModal} /> */}
 
         <AddTaskModal
           isVisible={modalVisible}
           selectedDate={selectedDate}
-          onClose={taskObject => {
-            console.log('taskObject: ', taskObject);
-            handleModalVisible;
+          onClose={(taskObject: any) => {
+            setTasks([
+              ...tasks,
+              {
+                selectedDate: selectedDate,
+                startTime: taskObject.startTime,
+                endTime: taskObject.endTime,
+                title: taskObject.title,
+                task: taskObject.task,
+              },
+            ]);
+            setModalVisible(false);
           }}
         />
 
         <View style={styles.addBtnMain}>
           <View>
-            <View style={{position: 'relative'}}>
+            <View style={styles.addBtnView}>
               <TouchableOpacity onPress={handleAdd}>
                 <Icon name="add" path={icons.add} color={'default'} size={35} />
               </TouchableOpacity>
-              <View style={{opacity: 0, position: 'absolute'}}>
+              <View style={styles.dateTimePickerView}>
                 {pickDate ? (
                   <DateTimePicker
                     value={today}
                     textColor="red"
-                    style={{backgroundColor: 'rgba(0,0,0,0)'}}
+                    style={styles.dateTimePicker}
                     mode="date"
                     locale="en"
                     onChange={handleSelectDate}

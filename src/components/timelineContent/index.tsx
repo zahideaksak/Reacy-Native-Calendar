@@ -1,6 +1,4 @@
 import React, {FC} from 'react';
-// import handleAddTask from '../handleAddTask';
-// import handleUpdateTask from '../handleUpdateTask';
 import Timeline from '../timeLine';
 
 interface Props {
@@ -16,8 +14,8 @@ const TimelineContent: FC<Props> = ({item: {data}, index}) => {
   return (
     <Timeline
       data={data}
-      // addTask={() => handleAddTask}
-      // updateTask={() => handleUpdateTask}
+      // addTask={hr => handleAddTask(hr, index)}
+      // updateTask={(task, taskIndex) => handleUpdateTask(task, taskIndex, index)}
     />
   );
 };

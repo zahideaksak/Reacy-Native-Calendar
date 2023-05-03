@@ -87,4 +87,14 @@ export const styles = StyleSheet.create({
     marginTop: 10,
     backgroundColor: theme.bgColor,
   },
+  addBtnView: {
+    position: 'relative',
+  },
+  dateTimePickerView: {
+    opacity: 0,
+    position: 'absolute',
+  },
+  dateTimePicker: {
+    backgroundColor: 'rgba(0,0,0,0)',
+  },
 });

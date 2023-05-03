@@ -16,7 +16,6 @@
   },
   "dependencies": {
     "@react-native-community/datetimepicker": "^7.0.1",
-    "@react-native-community/voice": "^1.1.9",
     "@react-native-voice/voice": "^3.2.4",
     "@react-navigation/native": "^6.1.6",
     "@react-navigation/native-stack": "^6.9.12",
