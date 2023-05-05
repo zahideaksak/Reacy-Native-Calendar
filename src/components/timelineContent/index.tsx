@@ -6,16 +6,18 @@ interface Props {
     data: any[];
   };
   index: number;
-  // handleAddTask: (hr: any, index: any) => void;
-  // handleUpdateTask: (task: any, taskIndex: number, index: number) => void;
+  handleUpdateTask: (task: any, taskIndex: number, index: number) => void;
 }
 
-const TimelineContent: FC<Props> = ({item: {data}, index}) => {
+const TimelineContent: FC<Props> = ({
+  item: {data},
+  index,
+  handleUpdateTask,
+}) => {
   return (
     <Timeline
       data={data}
-      // addTask={hr => handleAddTask(hr, index)}
-      // updateTask={(task, taskIndex) => handleUpdateTask(task, taskIndex, index)}
+      updateTask={(task, taskIndex) => handleUpdateTask(task, taskIndex, index)}
     />
   );
 };

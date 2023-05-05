@@ -12,32 +12,45 @@ import theme from '../../assets/theme';
 import hourList from '../../assets/hourList';
 import Icon from '../../components/icon';
 import calendarDummyDates from '../../assets/calendarDummyDates';
-import TimelineContent from '../../components/timelineContent';
 import TimelineHeader from '../../components/timelineHeader';
 import RenderHour from '../../components/renderHour';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {AddTaskModal} from '../../modal/addTaskModal';
 import {icons} from '../../assets/icons';
 import moment from 'moment';
+import Timeline from '../../components/timeLine';
 
 // const thisMonthStamp = 1664627943;
 const timelineHeight = hourList.length * 41;
 const today = new Date();
+interface Props {
+  item: {
+    data: any[];
+  };
+  index: number;
+}
 
 export const CalendarScreen: FC<any> = () => {
+  const defaultTaskObj = {
+    selectedDate: '',
+    taskID: 0,
+    startTime: 'Select Start Time',
+    endTime: 'Select End Time',
+    title: '',
+    task: '',
+  };
   const month = moment().format('MMMM');
   //const test = moment();
   //console.log('mom', test.daysInMonth());
   const [pickDate, setPickDate] = useState(false);
+  const [selectedTaskObj, setSelectedTaskObj] = useState(defaultTaskObj);
   const [monthText, setMonthText] = useState(month);
   const [days, setDays] = useState<any>(calendarDummyDates);
   const [selectedDate, setSelectedDate] = useState<string>();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [tasks, setTasks] = useState<any[]>([]);
-  // function handleModalVisible() {
-  //   setModalVisible(!modalVisible);
-  // }
-  console.log('days', days);
+
+  //console.log('days', days);
 
   useEffect(() => {
     let array = [];
@@ -65,7 +78,7 @@ export const CalendarScreen: FC<any> = () => {
         moment(x.selectedDate).format('YYYY') === '2023' &&
         moment(x.selectedDate).format('MMMM') === month,
     );
-    newDays = days.map(dayData => {
+    newDays = days.map((dayData: {day: number}) => {
       return {
         ...dayData,
         data: filteredTasks.filter(
@@ -77,62 +90,46 @@ export const CalendarScreen: FC<any> = () => {
     setDays(newDays);
   }, [tasks]);
 
-  // const handleAddTask = (time: {hr: number}, index: number) => {
-  //   const monthDay = days[index];
-  //   const dateToAdd = new Date(thisMonthStamp * 1000);
-  //   dateToAdd.setHours(time.hr);
-  //   dateToAdd.setDate(monthDay.day);
-  //   dateToAdd.setMinutes(0);
-  //   // const startHr = dateToAdd.getHours();
-  //   // const startMin = dateToAdd.getMinutes();
-  //   // const endHr = dateToAdd.getHours() + 1;
-  //   // const endMin = dateToAdd.getMinutes();
-  //   // addTaskModal.show(
-  //   //   {
-  //   //     dateToAdd,
-  //   //     startHr,
-  //   //     startMin,
-  //   //     endHr,
-  //   //     endMin,
-  //   //   },
-  //   //   // (task: any) => {
-  //   //   //   dispatchTask(task);
-  //   //   // },
-  //   // );
-  // };
-
-  const handleSelectDate = ({nativeEvent}: {nativeEvent: any; type: any}) => {
+  const handleSelectDate = async ({
+    nativeEvent,
+  }: {
+    nativeEvent: any;
+    type: any;
+  }) => {
     setPickDate(false);
     let selectedTimeStamp = new Date(nativeEvent.timestamp);
-    setSelectedDate(moment(selectedTimeStamp).format());
-    // if (type === 'set') {
-    //   let startHr = selectedTimeStamp.getHours();
-    //   let startMin = selectedTimeStamp.getMinutes();
-    //   let endHr = selectedTimeStamp.getHours() + 1;
-    //   let endMin = selectedTimeStamp.getMinutes();
-    //   if (addTaskModal.current) {
-    //     addTaskModal.current?.show(
-    //       {
-    //         dateToAdd,
-    //         startHr,
-    //         startMin,
-    //         endHr,
-    //         endMin,
-    //         showRecurring: false,
-    //       },
-    //       // (task: any) => {
-    //       //   dispatchTask(task);
-    //       // },
-    //     );
-    //   }
-    // }
+    console.log('selectedTimeStamp', selectedTimeStamp);
+    setSelectedTaskObj({
+      ...defaultTaskObj,
+      selectedDate: moment(selectedTimeStamp).format(),
+      taskID: tasks.length,
+    });
     setModalVisible(true);
   };
+
   const handleAdd = () => {
     setPickDate(true);
   };
 
+  const handleUpdateTask = (task: any, taskIndex: any, index: any) => {
+    console.log('update task tıklandııı');
+    setSelectedTaskObj(task);
+    setModalVisible(true);
+  };
+
   // const addTask = () => {};
+
+  const renderTimelineContent: FC<Props> = ({item: {data}, index}) => {
+    return (
+      <Timeline
+        data={data}
+        updateTask={(task, taskIndex) => {
+          console.log('test', task, taskIndex);
+          return handleUpdateTask(task, taskIndex, index);
+        }}
+      />
+    );
+  };
 
   return (
     <SafeAreaView>
@@ -182,32 +179,36 @@ export const CalendarScreen: FC<any> = () => {
                 onScroll={onTimeLineScroll}
                 contentContainerStyle={{height: timelineHeight}}
                 keyExtractor={item => {
-                  console.log('item', item);
                   return 'timeLineContent' + item?.day?.toString();
                 }}
-                renderItem={TimelineContent}
+                renderItem={renderTimelineContent}
               />
             </View>
           </View>
         </ScrollView>
 
-        <AddTaskModal
-          isVisible={modalVisible}
-          selectedDate={selectedDate}
-          onClose={(taskObject: any) => {
-            setTasks([
-              ...tasks,
-              {
-                selectedDate: selectedDate,
-                startTime: taskObject.startTime,
-                endTime: taskObject.endTime,
-                title: taskObject.title,
-                task: taskObject.task,
-              },
-            ]);
-            setModalVisible(false);
-          }}
-        />
+        {selectedTaskObj.selectedDate !== '' && (
+          <AddTaskModal
+            isVisible={modalVisible}
+            selectedDate={selectedDate}
+            taskObj={selectedTaskObj}
+            onClose={(taskObject: any) => {
+              setTasks([
+                ...tasks,
+                {
+                  selectedDate: taskObject.selectedDate,
+                  taskID: taskObject.taskID,
+                  startTime: taskObject.startTime,
+                  endTime: taskObject.endTime,
+                  title: taskObject.title,
+                  task: taskObject.task,
+                },
+              ]);
+              setSelectedTaskObj(defaultTaskObj);
+              setModalVisible(false);
+            }}
+          />
+        )}
 
         <View style={styles.addBtnMain}>
           <View>

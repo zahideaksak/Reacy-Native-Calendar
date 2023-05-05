@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
   },
   btnText: {
     fontSize: 15,
-    fontWeight: '500',
+    fontWeight: '600',
     color: '#3c4248',
   },
   inputTitle: {

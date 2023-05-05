@@ -14,53 +14,35 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Voice from '@react-native-voice/voice';
 import moment from 'moment';
 
-interface IModalProps {
-  isVisible: boolean;
-  selectedDate: any;
-  onClose: (task: object) => void;
-}
 interface ITaskObject {
   selectedDate: string;
+  taskID: number;
   startTime: any;
   endTime: any;
   title: string;
   task: string;
 }
+interface IModalProps {
+  isVisible: boolean;
+  onClose: (task: object) => void;
+  onBackClose: () => void;
+  taskObj: ITaskObject;
+}
 
 export const AddTaskModal: FC<IModalProps> = ({
   isVisible,
-  selectedDate,
+  taskObj,
   onClose,
+  onBackClose,
 }) => {
-  //console.log('selam', selectedEvent);
-  // const [nameInputValue, setNameInputValue] = useState<string>();
-  // const [taskInputValue, setTaskInputValue] = useState<string>();
-  const [taskObject, setTaskObject] = useState<ITaskObject>({
-    selectedDate: '',
-    startTime: 'Select Start Time',
-    endTime: 'Select End Time',
-    title: '',
-    task: '',
-  });
+  const [taskObject, setTaskObject] = useState<ITaskObject>(taskObj);
+  //console.log('taskObj', moment(taskObject?.selectedDate).format('MMM DD'));
   const [errorStartTime, setErrorStartTime] = useState<string>();
   const [errorEndTime, setErrorEndTime] = useState<string>();
   const [errorTitle, setErrorTitle] = useState<string>();
   const [errorTask, setErrorTask] = useState<string>();
 
-  // function handleAddTask() {
-  //   if (taskInputValue) {
-  //     onAddTask(taskInputValue);
-  //   }
-  //   setTaskInputValue('');
-  // }
   const handleAddTask = () => {
-    // console.log('taskObject: ', taskObject);
-    // if (
-    //   taskObject.startTime === 'Select Time' ||
-    //   taskObject.endTime === 'Select Time'
-    // ) {
-    //   Alert.alert('Please select time');
-    // }
     if (taskObject.startTime === 'Select Start Time') {
       setErrorStartTime('Please select time');
     }
@@ -82,7 +64,6 @@ export const AddTaskModal: FC<IModalProps> = ({
       onClose(taskObject);
     }
   };
-
   const [isStartTimePickerVisible, setStartTimePickerVisibility] =
     useState(false);
   const [isEndTimePickerVisible, setEndTimePickerVisibility] = useState(false);
@@ -94,12 +75,10 @@ export const AddTaskModal: FC<IModalProps> = ({
   const hideStartTimePicker = () => {
     setStartTimePickerVisibility(false);
   };
-
   const handleConfirmStartTime = (time: any) => {
-    //console.warn('A date has been picked: ', time);
-    const dt = new Date(time);
-    const x = dt.toLocaleTimeString();
-    setTaskObject({...taskObject, startTime: x});
+    const h = new Date(time).getHours();
+    const m = new Date(time).getMinutes();
+    setTaskObject({...taskObject, startTime: h + ':' + m});
     hideStartTimePicker();
   };
   const showEndTimePicker = () => {
@@ -109,15 +88,12 @@ export const AddTaskModal: FC<IModalProps> = ({
   const hideEndTimePicker = () => {
     setEndTimePickerVisibility(false);
   };
-
   const handleConfirmEndTime = (time: any) => {
-    //console.warn('A date has been picked: ', time);
-    const dt = new Date(time);
-    const x = dt.toLocaleTimeString();
-    setTaskObject({...taskObject, endTime: x});
+    const h = new Date(time).getHours();
+    const m = new Date(time).getMinutes();
+    setTaskObject({...taskObject, endTime: h + ':' + m});
     hideEndTimePicker();
   };
-
   //speech recognizition gelecek
   const [result, setResult] = useState('');
   const [isLoading, setLoading] = useState(false);
@@ -154,23 +130,22 @@ export const AddTaskModal: FC<IModalProps> = ({
       console.log('error raised', error);
     }
   };
+  // const stopRecording = async () => {
+  //   try {
+  //     await Voice.stop();
+  //   } catch (error) {
+  //     console.log('error raised', error);
+  //   }
+  // };
 
-  const stopRecording = async () => {
-    try {
-      await Voice.stop();
-    } catch (error) {
-      console.log('error raised', error);
-    }
-  };
-  console.log(moment(selectedDate).format('MMM DD'));
   return (
     <Modal
       isVisible={isVisible}
       style={styles.modalContainer}
-      onBackdropPress={() => onClose}>
+      onBackdropPress={() => onBackClose()}>
       <View style={styles.innerContainer}>
         <Text style={styles.title}>
-          Create Task | {moment(selectedDate).format('MMM DD')}
+          Create Task | {moment(taskObject?.selectedDate).format('MMM DD')}
         </Text>
         <View>
           <TouchableOpacity
@@ -201,6 +176,7 @@ export const AddTaskModal: FC<IModalProps> = ({
           {errorEndTime && <Text style={styles.errorTime}>{errorEndTime}</Text>}
         </View>
         <TextInput
+          value={taskObject.title}
           style={styles.inputTitle}
           placeholder="Title..."
           placeholderTextColor="#777"
@@ -208,11 +184,11 @@ export const AddTaskModal: FC<IModalProps> = ({
             setErrorTitle('');
             setTaskObject({...taskObject, title: val});
           }}
-          //value={nameInputValue}
         />
         {errorTitle && <Text style={styles.errorText}>{errorTitle}</Text>}
         <View style={styles.textInputStyle}>
           <TextInput
+            value={taskObject.task}
             style={styles.inputTask}
             placeholder="Task..."
             placeholderTextColor="#777"
@@ -220,7 +196,6 @@ export const AddTaskModal: FC<IModalProps> = ({
               setErrorTitle('');
               setTaskObject({...taskObject, task: val});
             }}
-            //value={taskInputValue}
           />
           {isLoading ? (
             <ActivityIndicator size="large" color="red" />

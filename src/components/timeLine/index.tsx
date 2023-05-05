@@ -1,32 +1,22 @@
-import moment from 'moment';
 import React, {FC} from 'react';
-import {View, Text, TouchableWithoutFeedback} from 'react-native';
+import {View, Text} from 'react-native';
 import hourList from '../../assets/hourList';
 import {styles} from './styled';
 
 interface Props {
   data: any;
-  addTask: (hour: any) => void;
+  //addTask: (hour: any) => void;
   updateTask: (task: any, idx: any) => void;
 }
 
-const Timeline: FC<Props> = ({data, addTask, updateTask}) => {
-  const renderHour = (hour: any, index: any) => {
-    return (
-      <>
-        <TouchableWithoutFeedback onPress={() => addTask(hour)} key={hour.txt}>
-          <View style={styles.hour} />
-        </TouchableWithoutFeedback>
-      </>
-    );
-  };
+const Timeline: FC<Props> = ({data, updateTask}) => {
   const plotTask = (task: any, idx: any) => {
     const {height, translateY} = calculateData(task);
     console.log('task', task);
     return (
       <Text
         onPress={() => updateTask(task, idx)}
-        key={task.name}
+        key={task.title}
         style={[
           styles.task,
           {
@@ -45,7 +35,9 @@ const Timeline: FC<Props> = ({data, addTask, updateTask}) => {
 
   return (
     <View style={styles.main}>
-      {hourList.map((hour, index) => renderHour(hour, index))}
+      {hourList.map(() => (
+        <View style={styles.hour} />
+      ))}
       {data.map((task: any, idx: any) => plotTask(task, idx))}
       {/* ??? */}
     </View>
