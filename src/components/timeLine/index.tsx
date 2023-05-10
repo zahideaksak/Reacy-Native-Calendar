@@ -5,7 +5,6 @@ import {styles} from './styled';
 
 interface Props {
   data: any;
-  //addTask: (hour: any) => void;
   updateTask: (task: any, idx: any) => void;
 }
 

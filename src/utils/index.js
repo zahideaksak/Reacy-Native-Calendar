@@ -5,10 +5,6 @@ const utils = {
     const stamp = parseInt(date / 1000, 10);
     return moment.unix(stamp).format('HH:mm a');
   },
-  getDate(date) {
-    const stamp = parseInt(date / 1000, 10);
-    return moment.unix(stamp).format('MMM DD');
-  },
 };
 
 export default utils;

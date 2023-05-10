@@ -41,7 +41,7 @@ export const CalendarScreen: FC<any> = () => {
   };
   const month = moment().format('MMMM');
   //const test = moment();
-  //console.log('mom', test.daysInMonth());
+  //console.log('mom', month);
   const [pickDate, setPickDate] = useState(false);
   const [selectedTaskObj, setSelectedTaskObj] = useState(defaultTaskObj);
   const [monthText, setMonthText] = useState(month);
@@ -50,7 +50,12 @@ export const CalendarScreen: FC<any> = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [tasks, setTasks] = useState<any[]>([]);
 
-  //console.log('days', days);
+  console.log('days', days);
+
+  const handleModalHidden = () => {
+    setModalVisible(false);
+    setSelectedTaskObj(defaultTaskObj);
+  };
 
   useEffect(() => {
     let array = [];
@@ -102,7 +107,6 @@ export const CalendarScreen: FC<any> = () => {
     setSelectedTaskObj({
       ...defaultTaskObj,
       selectedDate: moment(selectedTimeStamp).format(),
-      taskID: tasks.length,
     });
     setModalVisible(true);
   };
@@ -159,7 +163,7 @@ export const CalendarScreen: FC<any> = () => {
             horizontal
             data={days} // anlamadım
             ref={timelineHeader}
-            scrollToOffset={TimelineHeader}
+            // scrollToOffset={TimelineHeader}
             scrollEnabled={false}
             renderItem={TimelineHeader}
             keyExtractor={item => 'TimelineHeader' + item.day.toString()}
@@ -191,19 +195,40 @@ export const CalendarScreen: FC<any> = () => {
           <AddTaskModal
             isVisible={modalVisible}
             selectedDate={selectedDate}
+            onBackClose={handleModalHidden}
             taskObj={selectedTaskObj}
-            onClose={(taskObject: any) => {
+            onAddTask={(taskObject: any) => {
+              let isExistTask = tasks.some(t => t.taskID === taskObject.taskID);
+              console.log('isExistTask: ', isExistTask);
+              // if (isExistTask)
               setTasks([
                 ...tasks,
                 {
                   selectedDate: taskObject.selectedDate,
-                  taskID: taskObject.taskID,
+                  taskID: tasks.length + 1,
                   startTime: taskObject.startTime,
                   endTime: taskObject.endTime,
                   title: taskObject.title,
                   task: taskObject.task,
                 },
               ]);
+              // else {
+              //   let newTaskss = [];
+              //   tasks.map((task, index) => {
+              //     if (task.taskID === 1) {
+              //       newTaskss.push(task);
+              //     } else
+              //       newTaskss.push({
+              //         selectedDate: task.selectedDate,
+              //         taskID: task.taskID,
+              //         startTime: task.startTime,
+              //         endTime: task.endTime,
+              //         title: 'yeni',
+              //         task: 'yepisyeni',
+              //       });
+              //   });
+              // }
+
               setSelectedTaskObj(defaultTaskObj);
               setModalVisible(false);
             }}

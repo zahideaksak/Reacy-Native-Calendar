@@ -133,7 +133,7 @@ const days = [
     data: [],
   },
   {
-    weekDay: 'T',
+    weekDay: 'Thu',
     day: 27,
     data: [],
   },

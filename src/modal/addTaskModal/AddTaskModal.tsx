@@ -7,12 +7,15 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
+  ScrollView,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {styles} from './styled';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Voice from '@react-native-voice/voice';
 import moment from 'moment';
+import {format, getHours, setHours, setMinutes} from 'date-fns';
+import {utils} from '../../utils';
 
 interface ITaskObject {
   selectedDate: string;
@@ -24,15 +27,15 @@ interface ITaskObject {
 }
 interface IModalProps {
   isVisible: boolean;
-  onClose: (task: object) => void;
-  onBackClose: () => void;
+  onAddTask: (task: object) => void;
   taskObj: ITaskObject;
+  onBackClose: () => void;
 }
 
 export const AddTaskModal: FC<IModalProps> = ({
   isVisible,
   taskObj,
-  onClose,
+  onAddTask,
   onBackClose,
 }) => {
   const [taskObject, setTaskObject] = useState<ITaskObject>(taskObj);
@@ -41,6 +44,7 @@ export const AddTaskModal: FC<IModalProps> = ({
   const [errorEndTime, setErrorEndTime] = useState<string>();
   const [errorTitle, setErrorTitle] = useState<string>();
   const [errorTask, setErrorTask] = useState<string>();
+  const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
   const handleAddTask = () => {
     if (taskObject.startTime === 'Select Start Time') {
@@ -61,7 +65,7 @@ export const AddTaskModal: FC<IModalProps> = ({
       taskObject.title !== '' &&
       taskObject.task !== ''
     ) {
-      onClose(taskObject);
+      onAddTask(taskObject);
     }
   };
   const [isStartTimePickerVisible, setStartTimePickerVisibility] =
@@ -72,13 +76,16 @@ export const AddTaskModal: FC<IModalProps> = ({
     setStartTimePickerVisibility(true);
   };
 
+  console.log('taskObj: ', taskObject);
+
   const hideStartTimePicker = () => {
     setStartTimePickerVisibility(false);
   };
   const handleConfirmStartTime = (time: any) => {
-    const h = new Date(time).getHours();
-    const m = new Date(time).getMinutes();
-    setTaskObject({...taskObject, startTime: h + ':' + m});
+    const dt = new Date(time);
+    //const minTime = dt.setHours(dt.getHours() + 1);
+    var formattedDate = format(dt, 'H:mm');
+    setTaskObject({...taskObject, startTime: formattedDate});
     hideStartTimePicker();
   };
   const showEndTimePicker = () => {
@@ -89,9 +96,10 @@ export const AddTaskModal: FC<IModalProps> = ({
     setEndTimePickerVisibility(false);
   };
   const handleConfirmEndTime = (time: any) => {
-    const h = new Date(time).getHours();
-    const m = new Date(time).getMinutes();
-    setTaskObject({...taskObject, endTime: h + ':' + m});
+    const dt = new Date(time);
+    dt.setHours(dt.getHours() + 1);
+    var formattedDate = format(dt, 'H:mm');
+    setTaskObject({...taskObject, endTime: formattedDate});
     hideEndTimePicker();
   };
   //speech recognizition gelecek
@@ -144,80 +152,96 @@ export const AddTaskModal: FC<IModalProps> = ({
       style={styles.modalContainer}
       onBackdropPress={() => onBackClose()}>
       <View style={styles.innerContainer}>
-        <Text style={styles.title}>
-          Create Task | {moment(taskObject?.selectedDate).format('MMM DD')}
-        </Text>
-        <View>
-          <TouchableOpacity
-            style={styles.timeBtn}
-            onPress={showStartTimePicker}>
-            <Text style={styles.btnText}>{taskObject.startTime}</Text>
-          </TouchableOpacity>
-          <DateTimePickerModal
-            isVisible={isStartTimePickerVisible}
-            mode="time"
-            locale="en"
-            onConfirm={handleConfirmStartTime}
-            onCancel={hideStartTimePicker}
-          />
-          {errorStartTime && (
-            <Text style={styles.errorTime}>{errorStartTime}</Text>
-          )}
-          <TouchableOpacity style={styles.timeBtn} onPress={showEndTimePicker}>
-            <Text style={styles.btnText}>{taskObject.endTime}</Text>
-          </TouchableOpacity>
-          <DateTimePickerModal
-            isVisible={isEndTimePickerVisible}
-            mode="time"
-            locale="en"
-            onConfirm={handleConfirmEndTime}
-            onCancel={hideEndTimePicker}
-          />
-          {errorEndTime && <Text style={styles.errorTime}>{errorEndTime}</Text>}
-        </View>
-        <TextInput
-          value={taskObject.title}
-          style={styles.inputTitle}
-          placeholder="Title..."
-          placeholderTextColor="#777"
-          onChangeText={val => {
-            setErrorTitle('');
-            setTaskObject({...taskObject, title: val});
-          }}
-        />
-        {errorTitle && <Text style={styles.errorText}>{errorTitle}</Text>}
-        <View style={styles.textInputStyle}>
+        <ScrollView contentContainerStyle={styles.scrollView}>
+          <Text style={styles.title}>
+            {taskObject.taskID === 0 ? 'Create Task' : 'Update Task'} |{' '}
+            {moment(taskObject?.selectedDate).format('MMM DD')}
+          </Text>
+          <View>
+            <TouchableOpacity
+              style={styles.timeBtn}
+              onPress={showStartTimePicker}>
+              <Text style={styles.btnText}>{taskObject.startTime}</Text>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isStartTimePickerVisible}
+              mode="time"
+              locale="en"
+              onConfirm={handleConfirmStartTime}
+              onCancel={hideStartTimePicker}
+              date={new Date()}
+              minimumDate={new Date()}
+            />
+            {errorStartTime && (
+              <Text style={styles.errorTime}>{errorStartTime}</Text>
+            )}
+            <TouchableOpacity
+              style={styles.timeBtn}
+              onPress={showEndTimePicker}>
+              <Text style={styles.btnText}>{taskObject.endTime}</Text>
+            </TouchableOpacity>
+            <DateTimePickerModal
+              isVisible={isEndTimePickerVisible}
+              mode="time"
+              locale="en"
+              onConfirm={handleConfirmEndTime}
+              onCancel={hideEndTimePicker}
+              date={new Date()}
+              minimumDate={
+                new Date(new Date().setHours(new Date().getHours() + 1))
+              }
+            />
+            {errorEndTime && (
+              <Text style={styles.errorTime}>{errorEndTime}</Text>
+            )}
+          </View>
           <TextInput
-            value={taskObject.task}
-            style={styles.inputTask}
-            placeholder="Task..."
+            value={taskObject.title}
+            style={styles.inputTitle}
+            placeholder="Title..."
             placeholderTextColor="#777"
             onChangeText={val => {
               setErrorTitle('');
-              setTaskObject({...taskObject, task: val});
+              setTaskObject({...taskObject, title: val});
             }}
           />
-          {isLoading ? (
-            <ActivityIndicator size="large" color="red" />
-          ) : (
-            <TouchableOpacity onPress={startRecording}>
-              <Image
-                source={{
-                  uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/microphone.png',
-                }}
-                // eslint-disable-next-line react-native/no-inline-styles
-                style={{width: 25, height: 25}}
-              />
-            </TouchableOpacity>
-          )}
-        </View>
+          {errorTitle && <Text style={styles.errorText}>{errorTitle}</Text>}
+          <View style={styles.textInputStyle}>
+            <TextInput
+              value={taskObject.task}
+              style={styles.inputTask}
+              placeholder="Task..."
+              placeholderTextColor="#777"
+              onChangeText={val => {
+                setErrorTitle('');
+                setTaskObject({...taskObject, task: val});
+              }}
+            />
+            {isLoading ? (
+              <ActivityIndicator size="large" color="red" />
+            ) : (
+              <TouchableOpacity onPress={startRecording}>
+                <Image
+                  source={{
+                    uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/microphone.png',
+                  }}
+                  // eslint-disable-next-line react-native/no-inline-styles
+                  style={{width: 25, height: 25}}
+                />
+              </TouchableOpacity>
+            )}
+          </View>
 
-        {errorTask && <Text style={styles.errorText}>{errorTask}</Text>}
-        <View style={styles.buttonContainer}>
-          <TouchableWithoutFeedback onPress={handleAddTask}>
-            <Text style={styles.buttonPlaceHolder}>Add task</Text>
-          </TouchableWithoutFeedback>
-        </View>
+          {errorTask && <Text style={styles.errorText}>{errorTask}</Text>}
+
+          <TouchableOpacity style={{marginBottom: 30}} onPress={handleAddTask}>
+            <View style={styles.buttonContainer}>
+              <Text style={styles.buttonPlaceHolder}>
+                {taskObject.taskID === 0 ? 'Add Task' : 'Update Task'}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        </ScrollView>
       </View>
     </Modal>
   );
