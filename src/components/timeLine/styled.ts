@@ -10,16 +10,18 @@ export const styles = StyleSheet.create({
     borderColor: theme.faint,
   },
   task: {
-    fontSize: 11,
-    color: theme.bgColor,
-    textAlign: 'center',
     borderRadius: 5,
     position: 'absolute',
     width: 60,
     zIndex: 20,
     backgroundColor: theme.primary,
     overflow: 'hidden',
-    paddingTop: 5,
+  },
+  taskText: {
+    fontSize: 11,
+    color: theme.bgColor,
+    paddingTop: 6,
+    textAlign: 'center',
   },
   main: {
     width: 60,

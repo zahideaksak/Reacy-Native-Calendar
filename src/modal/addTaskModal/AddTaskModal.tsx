@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {FC, useState, useEffect} from 'react';
 import {
   View,
@@ -76,7 +77,7 @@ export const AddTaskModal: FC<IModalProps> = ({
     setStartTimePickerVisibility(true);
   };
 
-  console.log('taskObj: ', taskObject);
+  //console.log('taskObj: ', taskObject);
 
   const hideStartTimePicker = () => {
     setStartTimePickerVisibility(false);
@@ -96,8 +97,12 @@ export const AddTaskModal: FC<IModalProps> = ({
     setEndTimePickerVisibility(false);
   };
   const handleConfirmEndTime = (time: any) => {
+    console.log('time: ', time);
     const dt = new Date(time);
-    dt.setHours(dt.getHours() + 1);
+    const startTime = taskObject.startTime;
+    if (startTime === format(dt, 'H:mm')) {
+      dt.setMinutes(dt.getMinutes() + 15);
+    }
     var formattedDate = format(dt, 'H:mm');
     setTaskObject({...taskObject, endTime: formattedDate});
     hideEndTimePicker();
@@ -171,6 +176,7 @@ export const AddTaskModal: FC<IModalProps> = ({
               onCancel={hideStartTimePicker}
               date={new Date()}
               minimumDate={new Date()}
+              minuteInterval={15}
             />
             {errorStartTime && (
               <Text style={styles.errorTime}>{errorStartTime}</Text>
@@ -188,8 +194,9 @@ export const AddTaskModal: FC<IModalProps> = ({
               onCancel={hideEndTimePicker}
               date={new Date()}
               minimumDate={
-                new Date(new Date().setHours(new Date().getHours() + 1))
+                new Date(new Date().setMinutes(new Date().getMinutes() + 15))
               }
+              minuteInterval={15}
             />
             {errorEndTime && (
               <Text style={styles.errorTime}>{errorEndTime}</Text>
@@ -223,7 +230,7 @@ export const AddTaskModal: FC<IModalProps> = ({
               <TouchableOpacity onPress={startRecording}>
                 <Image
                   source={{
-                    uri: 'https://raw.githubusercontent.com/AboutReact/sampleresource/master/microphone.png',
+                    uri: 'https://static.vecteezy.com/system/resources/previews/015/658/445/original/podcast-microphone-icon-png.png',
                   }}
                   // eslint-disable-next-line react-native/no-inline-styles
                   style={{width: 25, height: 25}}

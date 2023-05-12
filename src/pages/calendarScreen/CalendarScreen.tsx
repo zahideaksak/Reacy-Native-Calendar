@@ -50,21 +50,13 @@ export const CalendarScreen: FC<any> = () => {
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [tasks, setTasks] = useState<any[]>([]);
 
-  console.log('days', days);
+  //console.log('tasks:', tasks);
+  //console.log('days', days);
 
   const handleModalHidden = () => {
     setModalVisible(false);
     setSelectedTaskObj(defaultTaskObj);
   };
-
-  useEffect(() => {
-    let array = [];
-    for (let index = 1; index <= moment().daysInMonth(); index++) {
-      const newDay = moment(`MMMM ${month} ${index}`);
-      array.push({weekDay: newDay.format('dd'), day: index, data: []});
-    }
-    setDays(array);
-  }, [month]);
 
   let timelineHeader = useRef<FlatList | null>(null);
   let timeLineContent: any;
@@ -94,6 +86,18 @@ export const CalendarScreen: FC<any> = () => {
     });
     setDays(newDays);
   }, [tasks]);
+
+  useEffect(() => {
+    let array = [];
+    for (let index = 1; index <= moment().daysInMonth(); index++) {
+      const newDay = moment(`MMMM ${month} ${index - 1}`);
+      array.push({weekDay: newDay.format('ddd'), day: index, data: []});
+      //onsole.log('month:', moment().daysInMonth());
+    }
+    setDays(array);
+    //console.log('array:', array);
+  }, [month]);
+  //console.log('days', days);
 
   const handleSelectDate = async ({
     nativeEvent,
@@ -198,26 +202,27 @@ export const CalendarScreen: FC<any> = () => {
             onBackClose={handleModalHidden}
             taskObj={selectedTaskObj}
             onAddTask={(taskObject: any) => {
-              let isExistTask = tasks.some(t => t.taskID === taskObject.taskID);
-              console.log('isExistTask: ', isExistTask);
-              // if (isExistTask)
+              // let isExistTask = tasks.some(t => t.taskID === taskObject.taskID);
+              // console.log('isExistTask: ', isExistTask);
+              const lastElementId = tasks[tasks.length - 1]?.taskID;
+              console.log('last', lastElementId);
               setTasks([
                 ...tasks,
                 {
                   selectedDate: taskObject.selectedDate,
-                  taskID: tasks.length + 1,
+                  taskID: lastElementId >= 0 ? lastElementId + 1 : 1,
                   startTime: taskObject.startTime,
                   endTime: taskObject.endTime,
                   title: taskObject.title,
                   task: taskObject.task,
                 },
               ]);
-              // else {
+              //} else {
               //   let newTaskss = [];
               //   tasks.map((task, index) => {
               //     if (task.taskID === 1) {
               //       newTaskss.push(task);
-              //     } else
+              //     } else {
               //       newTaskss.push({
               //         selectedDate: task.selectedDate,
               //         taskID: task.taskID,
@@ -226,6 +231,7 @@ export const CalendarScreen: FC<any> = () => {
               //         title: 'yeni',
               //         task: 'yepisyeni',
               //       });
+              //     }
               //   });
               // }
 

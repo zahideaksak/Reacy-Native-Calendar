@@ -7,7 +7,7 @@ export const styles = StyleSheet.create({
     margin: 0,
   },
   scrollView: {
-    padding: 15,
+    padding: 16,
   },
   innerContainer: {
     backgroundColor: '#FFFFFF',
@@ -21,6 +21,7 @@ export const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
     marginBottom: 14,
+    marginLeft: 2,
   },
   timeBtn: {
     height: 50,
@@ -84,7 +85,7 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: 15,
+    marginTop: 14,
     height: 52,
   },
   buttonPlaceHolder: {

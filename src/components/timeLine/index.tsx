@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, TouchableOpacity} from 'react-native';
 import hourList from '../../assets/hourList';
 import {styles} from './styled';
 
@@ -13,8 +13,9 @@ const Timeline: FC<Props> = ({data, updateTask}) => {
     const {height, translateY} = calculateData(task);
     console.log('task', task);
     return (
-      <Text
+      <TouchableOpacity
         onPress={() => updateTask(task, idx)}
+        onLongPress={() => console.log('uzun tıklandı')}
         key={task.title}
         style={[
           styles.task,
@@ -27,8 +28,8 @@ const Timeline: FC<Props> = ({data, updateTask}) => {
             ],
           },
         ]}>
-        {task.title}
-      </Text>
+        <Text style={styles.taskText}>{task.title}</Text>
+      </TouchableOpacity>
     );
   };
 
