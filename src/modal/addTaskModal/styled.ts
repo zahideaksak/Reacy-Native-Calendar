@@ -64,6 +64,7 @@ export const styles = StyleSheet.create({
     color: 'black',
     height: '100%',
     flex: 1,
+    paddingTop: 10,
   },
   textInputStyle: {
     height: 70,

@@ -40,7 +40,6 @@ export const AddTaskModal: FC<IModalProps> = ({
   onBackClose,
 }) => {
   const [taskObject, setTaskObject] = useState<ITaskObject>(taskObj);
-  //console.log('taskObj', moment(taskObject?.selectedDate).format('MMM DD'));
   const [errorStartTime, setErrorStartTime] = useState<string>();
   const [errorEndTime, setErrorEndTime] = useState<string>();
   const [errorTitle, setErrorTitle] = useState<string>();
@@ -223,6 +222,8 @@ export const AddTaskModal: FC<IModalProps> = ({
                 setErrorTitle('');
                 setTaskObject({...taskObject, task: val});
               }}
+              multiline={true}
+              textAlignVertical={'top'}
             />
             {isLoading ? (
               <ActivityIndicator size="large" color="red" />

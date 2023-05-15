@@ -92,12 +92,9 @@ export const CalendarScreen: FC<any> = () => {
     for (let index = 1; index <= moment().daysInMonth(); index++) {
       const newDay = moment(`MMMM ${month} ${index - 1}`);
       array.push({weekDay: newDay.format('ddd'), day: index, data: []});
-      //onsole.log('month:', moment().daysInMonth());
     }
     setDays(array);
-    //console.log('array:', array);
   }, [month]);
-  //console.log('days', days);
 
   const handleSelectDate = async ({
     nativeEvent,
@@ -202,39 +199,37 @@ export const CalendarScreen: FC<any> = () => {
             onBackClose={handleModalHidden}
             taskObj={selectedTaskObj}
             onAddTask={(taskObject: any) => {
-              // let isExistTask = tasks.some(t => t.taskID === taskObject.taskID);
-              // console.log('isExistTask: ', isExistTask);
+              let isExistTask = tasks.some(t => t.taskID === taskObject.taskID);
+              console.log('isExistTask: ', isExistTask);
               const lastElementId = tasks[tasks.length - 1]?.taskID;
               console.log('last', lastElementId);
-              setTasks([
-                ...tasks,
-                {
-                  selectedDate: taskObject.selectedDate,
-                  taskID: lastElementId >= 0 ? lastElementId + 1 : 1,
-                  startTime: taskObject.startTime,
-                  endTime: taskObject.endTime,
-                  title: taskObject.title,
-                  task: taskObject.task,
-                },
-              ]);
-              //} else {
-              //   let newTaskss = [];
-              //   tasks.map((task, index) => {
-              //     if (task.taskID === 1) {
-              //       newTaskss.push(task);
-              //     } else {
-              //       newTaskss.push({
-              //         selectedDate: task.selectedDate,
-              //         taskID: task.taskID,
-              //         startTime: task.startTime,
-              //         endTime: task.endTime,
-              //         title: 'yeni',
-              //         task: 'yepisyeni',
-              //       });
-              //     }
-              //   });
-              // }
-
+              if (isExistTask) {
+                const newTask = tasks.map(task => {
+                  if (task.taskID === taskObject.taskID) {
+                    return {
+                      ...task,
+                      startTime: taskObject.startTime,
+                      endTime: taskObject.endTime,
+                      title: taskObject.title,
+                      task: taskObject.task,
+                    };
+                  }
+                  return task;
+                });
+                setTasks(newTask);
+              } else {
+                setTasks([
+                  ...tasks,
+                  {
+                    selectedDate: taskObject.selectedDate,
+                    taskID: lastElementId >= 0 ? lastElementId + 1 : 1,
+                    startTime: taskObject.startTime,
+                    endTime: taskObject.endTime,
+                    title: taskObject.title,
+                    task: taskObject.task,
+                  },
+                ]);
+              }
               setSelectedTaskObj(defaultTaskObj);
               setModalVisible(false);
             }}
