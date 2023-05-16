@@ -4,19 +4,16 @@ import {
   View,
   Text,
   TextInput,
-  TouchableWithoutFeedback,
   TouchableOpacity,
-  ActivityIndicator,
   Image,
   ScrollView,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {styles} from './styled';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import Voice from '@react-native-voice/voice';
+import Voice from '@react-native-community/voice';
 import moment from 'moment';
-import {format, getHours, setHours, setMinutes} from 'date-fns';
-import {utils} from '../../utils';
+import {format} from 'date-fns';
 
 interface ITaskObject {
   selectedDate: string;
@@ -44,7 +41,6 @@ export const AddTaskModal: FC<IModalProps> = ({
   const [errorEndTime, setErrorEndTime] = useState<string>();
   const [errorTitle, setErrorTitle] = useState<string>();
   const [errorTask, setErrorTask] = useState<string>();
-  const [currentDate, setCurrentDate] = useState<Date>(new Date());
 
   const handleAddTask = () => {
     if (taskObject.startTime === 'Select Start Time') {
@@ -75,15 +71,16 @@ export const AddTaskModal: FC<IModalProps> = ({
   const showStartTimePicker = () => {
     setStartTimePickerVisibility(true);
   };
-
-  //console.log('taskObj: ', taskObject);
-
   const hideStartTimePicker = () => {
     setStartTimePickerVisibility(false);
   };
   const handleConfirmStartTime = (time: any) => {
     const dt = new Date(time);
-    //const minTime = dt.setHours(dt.getHours() + 1);
+    console.log('dt: ', dt);
+    if (dt.getMinutes() % 15 !== 0) {
+      const roundedMinutes = Math.ceil(dt.getMinutes() / 15) * 15;
+      dt.setMinutes(roundedMinutes);
+    }
     var formattedDate = format(dt, 'H:mm');
     setTaskObject({...taskObject, startTime: formattedDate});
     hideStartTimePicker();
@@ -91,14 +88,16 @@ export const AddTaskModal: FC<IModalProps> = ({
   const showEndTimePicker = () => {
     setEndTimePickerVisibility(true);
   };
-
   const hideEndTimePicker = () => {
     setEndTimePickerVisibility(false);
   };
   const handleConfirmEndTime = (time: any) => {
-    console.log('time: ', time);
     const dt = new Date(time);
     const startTime = taskObject.startTime;
+    if (dt.getMinutes() % 15 !== 0) {
+      const roundedMinutes = Math.ceil(dt.getMinutes() / 15) * 15;
+      dt.setMinutes(roundedMinutes);
+    }
     if (startTime === format(dt, 'H:mm')) {
       dt.setMinutes(dt.getMinutes() + 15);
     }
@@ -107,48 +106,48 @@ export const AddTaskModal: FC<IModalProps> = ({
     hideEndTimePicker();
   };
   //speech recognizition gelecek
-  const [result, setResult] = useState('');
-  const [isLoading, setLoading] = useState(false);
+  const [isRecording, setIsRecording] = useState(false);
 
   useEffect(() => {
-    Voice.onSpeechStart = onSpeechStartHandler;
-    Voice.onSpeechEnd = onSpeechEndHandler;
-    Voice.onSpeechResults = onSpeechResultsHandler;
-
+    Voice.onSpeechStart = speechStartHandler;
+    Voice.onSpeechEnd = speechEndHandler;
+    Voice.onSpeechResults = speechResultsHandler;
     return () => {
       Voice.destroy().then(Voice.removeAllListeners);
     };
   }, []);
 
-  const onSpeechStartHandler = (e: any) => {
-    console.log('start handler==>>>', e);
+  const speechStartHandler = (e: any) => {
+    console.log('speechStart successful', e);
   };
-  const onSpeechEndHandler = (e: any) => {
-    setLoading(false);
+
+  const speechEndHandler = (e: any) => {
+    setIsRecording(false);
     console.log('stop handler', e);
   };
 
-  const onSpeechResultsHandler = (e: any) => {
-    let text = e.value[0];
-    setResult(text);
-    console.log('speech result handler', e);
+  const speechResultsHandler = (e: any) => {
+    const text = e.value[0];
+    setTaskObject({...taskObject, task: text});
   };
 
   const startRecording = async () => {
-    setLoading(true);
+    setIsRecording(true);
     try {
-      await Voice.start('en-US');
+      await Voice.start('tr-TR');
     } catch (error) {
-      console.log('error raised', error);
+      console.log('error', error);
     }
   };
-  // const stopRecording = async () => {
-  //   try {
-  //     await Voice.stop();
-  //   } catch (error) {
-  //     console.log('error raised', error);
-  //   }
-  // };
+
+  const stopRecording = async () => {
+    try {
+      await Voice.stop();
+      setIsRecording(false);
+    } catch (error) {
+      console.log('error', error);
+    }
+  };
 
   return (
     <Modal
@@ -225,23 +224,17 @@ export const AddTaskModal: FC<IModalProps> = ({
               multiline={true}
               textAlignVertical={'top'}
             />
-            {isLoading ? (
-              <ActivityIndicator size="large" color="red" />
-            ) : (
-              <TouchableOpacity onPress={startRecording}>
+            <View style={isRecording ? styles.micButtonView : null}>
+              <TouchableOpacity
+                onPress={isRecording ? stopRecording : startRecording}>
                 <Image
-                  source={{
-                    uri: 'https://static.vecteezy.com/system/resources/previews/015/658/445/original/podcast-microphone-icon-png.png',
-                  }}
-                  // eslint-disable-next-line react-native/no-inline-styles
-                  style={{width: 25, height: 25}}
+                  source={require('../../assets/mic.png')}
+                  style={styles.micImage}
                 />
               </TouchableOpacity>
-            )}
+            </View>
           </View>
-
           {errorTask && <Text style={styles.errorText}>{errorTask}</Text>}
-
           <TouchableOpacity style={{marginBottom: 30}} onPress={handleAddTask}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonPlaceHolder}>

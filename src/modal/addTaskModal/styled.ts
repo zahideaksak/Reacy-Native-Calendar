@@ -65,6 +65,7 @@ export const styles = StyleSheet.create({
     height: '100%',
     flex: 1,
     paddingTop: 10,
+    paddingRight: 10,
   },
   textInputStyle: {
     height: 70,
@@ -105,5 +106,25 @@ export const styles = StyleSheet.create({
     marginLeft: 8,
     color: '#E74C3C',
     fontSize: 12,
+  },
+  micButtonView: {
+    width: 50,
+    height: 50,
+    paddingLeft: 10,
+    backgroundColor: '#77B9FF',
+    borderRadius: 50,
+    justifyContent: 'center',
+    alignItems: 'center',
+    opacity: 0.7,
+    shadowOffset: {width: 0, height: 0},
+    shadowRadius: 2,
+    shadowOpacity: 0.3,
+    zIndex: 0,
+  },
+  micImage: {
+    width: 23,
+    height: 23,
+    marginRight: 10,
+    zIndex: 1,
   },
 });
