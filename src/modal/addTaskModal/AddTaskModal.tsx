@@ -105,7 +105,8 @@ export const AddTaskModal: FC<IModalProps> = ({
     setTaskObject({...taskObject, endTime: formattedDate});
     hideEndTimePicker();
   };
-  //speech recognizition gelecek
+  //speech recognizition
+  const [result, setResult] = useState('');
   const [isRecording, setIsRecording] = useState(false);
 
   useEffect(() => {
@@ -117,18 +118,23 @@ export const AddTaskModal: FC<IModalProps> = ({
     };
   }, []);
 
-  const speechStartHandler = (e: any) => {
-    console.log('speechStart successful', e);
-  };
+  useEffect(() => {
+    if (result.length > 0) setTaskObject({...taskObject, task: result});
+  }, [result]);
 
+  const speechStartHandler = (e: any) => {
+    setIsRecording(true);
+    console.log('start handler==>>>', e);
+  };
   const speechEndHandler = (e: any) => {
     setIsRecording(false);
     console.log('stop handler', e);
   };
 
   const speechResultsHandler = (e: any) => {
-    const text = e.value[0];
-    setTaskObject({...taskObject, task: text});
+    let text = e.value[0];
+    setResult(text);
+    console.log('speech result handler', e);
   };
 
   const startRecording = async () => {
@@ -136,16 +142,14 @@ export const AddTaskModal: FC<IModalProps> = ({
     try {
       await Voice.start('tr-TR');
     } catch (error) {
-      console.log('error', error);
+      console.log('error raised', error);
     }
   };
-
   const stopRecording = async () => {
     try {
       await Voice.stop();
-      setIsRecording(false);
     } catch (error) {
-      console.log('error', error);
+      console.log('error raised', error);
     }
   };
 
@@ -218,6 +222,7 @@ export const AddTaskModal: FC<IModalProps> = ({
               placeholder="Task..."
               placeholderTextColor="#777"
               onChangeText={val => {
+                console.log('123');
                 setErrorTitle('');
                 setTaskObject({...taskObject, task: val});
               }}
