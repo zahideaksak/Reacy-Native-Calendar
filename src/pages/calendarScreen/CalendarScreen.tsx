@@ -25,6 +25,7 @@ const timelineHeight = hourList.length * 41;
 const today = new Date();
 interface Props {
   item: {
+    day: any;
     data: any[];
   };
   index: number;
@@ -85,12 +86,12 @@ export const CalendarScreen: FC<any> = () => {
       };
     });
     setDays(newDays);
-  }, [tasks]);
+  }, [days, month, tasks]);
 
   useEffect(() => {
     let array = [];
     for (let index = 1; index <= moment().daysInMonth(); index++) {
-      const newDay = moment(`MMMM ${month} ${index - 1}`);
+      const newDay = moment(`MMMM ${month} ${index}`);
       array.push({weekDay: newDay.format('ddd'), day: index, data: []});
     }
     setDays(array);
@@ -200,9 +201,9 @@ export const CalendarScreen: FC<any> = () => {
             taskObj={selectedTaskObj}
             onAddTask={(taskObject: any) => {
               let isExistTask = tasks.some(t => t.taskID === taskObject.taskID);
-              console.log('isExistTask: ', isExistTask);
+              //console.log('isExistTask: ', isExistTask);
               const lastElementId = tasks[tasks.length - 1]?.taskID;
-              console.log('last', lastElementId);
+              //console.log('last', lastElementId);
               if (isExistTask) {
                 const newTask = tasks.map(task => {
                   if (task.taskID === taskObject.taskID) {
@@ -230,7 +231,7 @@ export const CalendarScreen: FC<any> = () => {
                   },
                 ]);
               }
-              setSelectedTaskObj(defaultTaskObj);
+              setSelectedTaskObj(defaultTaskObj); //anlamadımm
               setModalVisible(false);
             }}
           />

@@ -28,6 +28,7 @@ interface IModalProps {
   onAddTask: (task: object) => void;
   taskObj: ITaskObject;
   onBackClose: () => void;
+  selectedDate: string | undefined;
 }
 
 export const AddTaskModal: FC<IModalProps> = ({
