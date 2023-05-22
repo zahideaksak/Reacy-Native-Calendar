@@ -6,6 +6,7 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {styles} from './styled';
 import theme from '../../assets/theme';
@@ -86,12 +87,12 @@ export const CalendarScreen: FC<any> = () => {
       };
     });
     setDays(newDays);
-  }, [days, month, tasks]);
+  }, [tasks]);
 
   useEffect(() => {
     let array = [];
     for (let index = 1; index <= moment().daysInMonth(); index++) {
-      const newDay = moment(`MMMM ${month} ${index}`);
+      const newDay = moment(`MMMM ${month} ${index - 1}`);
       array.push({weekDay: newDay.format('ddd'), day: index, data: []});
     }
     setDays(array);
@@ -143,21 +144,13 @@ export const CalendarScreen: FC<any> = () => {
         <View style={styles.headerMain}>
           <View style={styles.headerTopRowHeader}>
             <View style={styles.headerIconCover}>
-              <Icon
-                name="menu"
-                path={icons.menu}
-                size={26}
-                color={theme.grey}
+              <Image
+                source={require('../../assets/calendar7.jpeg')}
+                style={{width: 32, height: 32}}
               />
             </View>
             <View style={styles.headerMonthPicker}>
               <Text style={styles.headerMonthPickerTxt}>{monthText}</Text>
-              <Icon
-                name="chevronDown"
-                path={icons.chevronDown}
-                color={theme.grey}
-                size={14}
-              />
             </View>
           </View>
 

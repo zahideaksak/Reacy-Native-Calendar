@@ -159,12 +159,14 @@ export const AddTaskModal: FC<IModalProps> = ({
       isVisible={isVisible}
       style={styles.modalContainer}
       onBackdropPress={() => onBackClose()}>
-      <View style={styles.innerContainer}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+      <View style={styles.container}>
+        <View style={styles.innerContainer}>
           <Text style={styles.title}>
             {taskObject.taskID === 0 ? 'Create Task' : 'Update Task'} |{' '}
             {moment(taskObject?.selectedDate).format('MMM DD')}
           </Text>
+        </View>
+        <ScrollView contentContainerStyle={styles.scrollView}>
           <View>
             <TouchableOpacity
               style={styles.timeBtn}
