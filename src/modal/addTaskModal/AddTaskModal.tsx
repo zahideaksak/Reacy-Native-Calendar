@@ -14,6 +14,7 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Voice from '@react-native-community/voice';
 import moment from 'moment';
 import {format} from 'date-fns';
+import {useDispatch, useSelector} from 'react-redux';
 
 interface ITaskObject {
   selectedDate: string;
@@ -41,6 +42,8 @@ export const AddTaskModal: FC<IModalProps> = ({
   const [errorEndTime, setErrorEndTime] = useState<string>();
   const [errorTitle, setErrorTitle] = useState<string>();
   const [errorTask, setErrorTask] = useState<string>();
+
+  const dispatch = useDispatch();
 
   const handleAddTask = () => {
     if (taskObject.startTime === 'Select Start Time') {

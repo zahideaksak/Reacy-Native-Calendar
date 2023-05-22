@@ -8,7 +8,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {styles} from './styled';
-import theme from '../../assets/theme';
 import hourList from '../../assets/hourList';
 import Icon from '../../components/icon';
 import calendarDummyDates from '../../assets/calendarDummyDates';
@@ -116,7 +115,7 @@ export const CalendarScreen: FC<any> = () => {
     setPickDate(true);
   };
 
-  const handleUpdateTask = (task: any, taskIndex: any, index: any) => {
+  const handleUpdateTask = (task: any) => {
     console.log('update task tıklandııı');
     setSelectedTaskObj(task);
     setModalVisible(true);
@@ -130,7 +129,7 @@ export const CalendarScreen: FC<any> = () => {
         data={data}
         updateTask={(task, taskIndex) => {
           console.log('test', task, taskIndex);
-          return handleUpdateTask(task, taskIndex, index);
+          return handleUpdateTask(task);
         }}
       />
     );

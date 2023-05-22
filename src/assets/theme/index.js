@@ -6,6 +6,8 @@ const theme = {
   primary: '#0a95ff',
   light: '#E5F4FF',
   dark: '#111',
+  mic: '#77B9FF',
+  error: '#E74C3C',
 };
 
 export default theme;

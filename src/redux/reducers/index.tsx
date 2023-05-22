@@ -11,7 +11,7 @@ const taskSlice = createSlice({
     addTasks: (state, action: any) => {
       state.value.push(action.payload);
     },
-    updateTasks: (state, action: any) => {},
+    updateTasks: () => {},
   },
 });
 
