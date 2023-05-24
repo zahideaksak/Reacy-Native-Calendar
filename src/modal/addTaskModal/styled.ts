@@ -9,18 +9,27 @@ export const styles = StyleSheet.create({
   scrollView: {
     padding: 16,
   },
-  innerContainer: {
-    backgroundColor: '#FFFFFF',
+  container: {
+    backgroundColor: '#F1F1F1',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
     height: deviceSize.height / 2,
+  },
+  innerContainer: {
+    backgroundColor: '#FAFAFA',
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    paddingTop: 12,
+    paddingLeft: 10,
+    borderBottomColor: '#C8C8C8',
+    borderBottomWidth: 1.5,
   },
   title: {
     color: 'black',
     textAlign: 'left',
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 14,
+    marginBottom: 8,
     marginLeft: 2,
   },
   timeBtn: {
@@ -83,7 +92,7 @@ export const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonContainer: {
-    backgroundColor: '#77B9FF',
+    backgroundColor: '#95B7FF',
     borderRadius: 8,
     justifyContent: 'center',
     alignItems: 'center',
@@ -111,7 +120,7 @@ export const styles = StyleSheet.create({
     width: 50,
     height: 50,
     paddingLeft: 10,
-    backgroundColor: '#77B9FF',
+    backgroundColor: '#95B7FF',
     borderRadius: 50,
     justifyContent: 'center',
     alignItems: 'center',

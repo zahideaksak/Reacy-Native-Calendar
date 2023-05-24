@@ -1,19 +1,18 @@
-import {createSlice} from '@reduxjs/toolkit';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 
-const initialState: any = {
-  tasks: [],
-};
+const initialState: any = [];
 
 const taskSlice = createSlice({
   name: 'tasks',
   initialState,
   reducers: {
-    addTasks: (state, action: any) => {
-      state.value.push(action.payload);
+    addTask: (state, action: PayloadAction<any>) => {
+      console.log('action', action);
+      state.push(action.payload);
     },
-    updateTasks: () => {},
+    updateTask: () => {},
   },
 });
 
-export const {addTasks, updateTasks} = taskSlice.actions; //CreateAction()
-export default taskSlice.reducer; //createReducer()
+export const {addTask, updateTask} = taskSlice.actions;
+export default taskSlice.reducer;

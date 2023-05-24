@@ -1,10 +1,24 @@
-import {configureStore} from '@reduxjs/toolkit';
+import {configureStore, combineReducers} from '@reduxjs/toolkit';
+import thunk from 'redux-thunk';
 import taskReducer from '../reducers';
+import {persistReducer} from 'redux-persist';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+const persistConfig = {
+  key: 'root',
+  storage: AsyncStorage,
+};
+
+let rootReducer = combineReducers({
+  task: taskReducer,
+});
+
+let persistedReducer = persistReducer(persistConfig, rootReducer);
 
 const store = configureStore({
-  reducer: {
-    tasks: taskReducer,
-  },
+  reducer: persistedReducer,
+  // devTools: process.env.NODE_ENV !== 'production',
+  middleware: [thunk],
 });
 
 export default store;

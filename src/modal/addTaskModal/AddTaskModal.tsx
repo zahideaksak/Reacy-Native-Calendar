@@ -14,21 +14,14 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Voice from '@react-native-community/voice';
 import moment from 'moment';
 import {format} from 'date-fns';
-import {useDispatch, useSelector} from 'react-redux';
+import {ITask} from '../../models/index';
 
-interface ITaskObject {
-  selectedDate: string;
-  taskID: number;
-  startTime: any;
-  endTime: any;
-  title: string;
-  task: string;
-}
 interface IModalProps {
   isVisible: boolean;
   onAddTask: (task: object) => void;
-  taskObj: ITaskObject;
+  taskObj: ITask;
   onBackClose: () => void;
+  selectedDate: any;
 }
 
 export const AddTaskModal: FC<IModalProps> = ({
@@ -37,13 +30,11 @@ export const AddTaskModal: FC<IModalProps> = ({
   onAddTask,
   onBackClose,
 }) => {
-  const [taskObject, setTaskObject] = useState<ITaskObject>(taskObj);
+  const [taskObject, setTaskObject] = useState<ITask>(taskObj);
   const [errorStartTime, setErrorStartTime] = useState<string>();
   const [errorEndTime, setErrorEndTime] = useState<string>();
   const [errorTitle, setErrorTitle] = useState<string>();
   const [errorTask, setErrorTask] = useState<string>();
-
-  const dispatch = useDispatch();
 
   const handleAddTask = () => {
     if (taskObject.startTime === 'Select Start Time') {
@@ -108,7 +99,7 @@ export const AddTaskModal: FC<IModalProps> = ({
     setTaskObject({...taskObject, endTime: formattedDate});
     hideEndTimePicker();
   };
-  //speech recognizition gelecek
+  //speech recognizition
   const [isRecording, setIsRecording] = useState(false);
 
   useEffect(() => {
@@ -118,6 +109,7 @@ export const AddTaskModal: FC<IModalProps> = ({
     return () => {
       Voice.destroy().then(Voice.removeAllListeners);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const speechStartHandler = (e: any) => {
@@ -157,12 +149,14 @@ export const AddTaskModal: FC<IModalProps> = ({
       isVisible={isVisible}
       style={styles.modalContainer}
       onBackdropPress={() => onBackClose()}>
-      <View style={styles.innerContainer}>
-        <ScrollView contentContainerStyle={styles.scrollView}>
+      <View style={styles.container}>
+        <View style={styles.innerContainer}>
           <Text style={styles.title}>
             {taskObject.taskID === 0 ? 'Create Task' : 'Update Task'} |{' '}
             {moment(taskObject?.selectedDate).format('MMM DD')}
           </Text>
+        </View>
+        <ScrollView contentContainerStyle={styles.scrollView}>
           <View>
             <TouchableOpacity
               style={styles.timeBtn}
@@ -221,6 +215,7 @@ export const AddTaskModal: FC<IModalProps> = ({
               placeholder="Task..."
               placeholderTextColor="#777"
               onChangeText={val => {
+                console.log('123');
                 setErrorTitle('');
                 setTaskObject({...taskObject, task: val});
               }}

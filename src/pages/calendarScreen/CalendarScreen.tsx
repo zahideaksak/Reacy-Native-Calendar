@@ -6,6 +6,7 @@ import {
   FlatList,
   ScrollView,
   TouchableOpacity,
+  Image,
 } from 'react-native';
 import {styles} from './styled';
 import hourList from '../../assets/hourList';
@@ -18,6 +19,8 @@ import {AddTaskModal} from '../../modal/addTaskModal';
 import {icons} from '../../assets/icons';
 import moment from 'moment';
 import Timeline from '../../components/timeLine';
+import {useDispatch, useSelector} from 'react-redux';
+import {addTask} from '../../redux/reducers';
 
 // const thisMonthStamp = 1664627943;
 const timelineHeight = hourList.length * 41;
@@ -30,6 +33,9 @@ interface Props {
 }
 
 export const CalendarScreen: FC<any> = () => {
+  const taskList = useSelector<any>(state => state.task);
+  console.log('taskList:', taskList);
+  const dispatch = useDispatch();
   const defaultTaskObj = {
     selectedDate: '',
     taskID: 0,
@@ -38,19 +44,13 @@ export const CalendarScreen: FC<any> = () => {
     title: '',
     task: '',
   };
+  let selectedDate: any;
   const month = moment().format('MMMM');
-  //const test = moment();
-  //console.log('mom', month);
   const [pickDate, setPickDate] = useState(false);
   const [selectedTaskObj, setSelectedTaskObj] = useState(defaultTaskObj);
-  const [monthText, setMonthText] = useState(month);
   const [days, setDays] = useState<any>(calendarDummyDates);
-  const [selectedDate, setSelectedDate] = useState<string>();
   const [modalVisible, setModalVisible] = useState<boolean>(false);
   const [tasks, setTasks] = useState<any[]>([]);
-
-  //console.log('tasks:', tasks);
-  //console.log('days', days);
 
   const handleModalHidden = () => {
     setModalVisible(false);
@@ -123,7 +123,7 @@ export const CalendarScreen: FC<any> = () => {
 
   // const addTask = () => {};
 
-  const renderTimelineContent: FC<Props> = ({item: {data}, index}) => {
+  const renderTimelineContent: FC<Props> = ({item: {data}}) => {
     return (
       <Timeline
         data={data}
@@ -141,21 +141,13 @@ export const CalendarScreen: FC<any> = () => {
         <View style={styles.headerMain}>
           <View style={styles.headerTopRowHeader}>
             <View style={styles.headerIconCover}>
-              <Icon
-                name="menu"
-                path={icons.menu}
-                size={26}
-                color={theme.grey}
+              <Image
+                source={require('../../assets/calendar7.jpeg')}
+                style={{width: 32, height: 32}}
               />
             </View>
             <View style={styles.headerMonthPicker}>
-              <Text style={styles.headerMonthPickerTxt}>{monthText}</Text>
-              <Icon
-                name="chevronDown"
-                path={icons.chevronDown}
-                color={theme.grey}
-                size={14}
-              />
+              <Text style={styles.headerMonthPickerTxt}>{month}</Text>
             </View>
           </View>
 
@@ -228,6 +220,17 @@ export const CalendarScreen: FC<any> = () => {
                     task: taskObject.task,
                   },
                 ]);
+                console.log('test123');
+                dispatch(
+                  addTask({
+                    selectedDate: taskObject.selectedDate,
+                    taskID: lastElementId >= 0 ? lastElementId + 1 : 1,
+                    startTime: taskObject.startTime,
+                    endTime: taskObject.endTime,
+                    title: taskObject.title,
+                    task: taskObject.task,
+                  }),
+                );
               }
               setSelectedTaskObj(defaultTaskObj);
               setModalVisible(false);

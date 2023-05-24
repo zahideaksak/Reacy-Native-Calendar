@@ -63,9 +63,6 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     height: 50,
     width: 100,
-    borderRightWidth: 0.2,
-    borderBottomWidth: 0.2,
-    borderBottomRightRadius: 10,
   },
   headerIconCover: {
     width: 50,
