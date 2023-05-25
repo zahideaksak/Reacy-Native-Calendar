@@ -70,6 +70,10 @@ export const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  headerIconCoverImg: {
+    width: 32,
+    height: 32,
+  },
   headerMonthPicker: {
     flexDirection: 'row',
     height: 50,

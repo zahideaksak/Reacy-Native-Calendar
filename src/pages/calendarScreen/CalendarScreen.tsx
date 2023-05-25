@@ -21,20 +21,23 @@ import moment from 'moment';
 import Timeline from '../../components/timeLine';
 import {useDispatch, useSelector} from 'react-redux';
 import {addTask} from '../../redux/reducers';
+import {RootState} from '../../redux/store';
+import {ITask} from '../../models';
 
-// const thisMonthStamp = 1664627943;
 const timelineHeight = hourList.length * 41;
 const today = new Date();
 interface Props {
   item: {
+    day: any;
     data: any[];
   };
   index: number;
 }
 
 export const CalendarScreen: FC<any> = () => {
-  const taskList = useSelector<any>(state => state.task);
-  console.log('taskList:', taskList);
+  const taskList = useSelector((state: RootState) => state.task);
+  console.log('tasklist: ', taskList);
+
   const dispatch = useDispatch();
   const defaultTaskObj = {
     selectedDate: '',
@@ -68,42 +71,32 @@ export const CalendarScreen: FC<any> = () => {
   };
 
   useEffect(() => {
-    let newDays;
-    const filteredTasks = tasks.filter(
-      x =>
-        moment(x.selectedDate).format('YYYY') === '2023' &&
-        moment(x.selectedDate).format('MMMM') === month,
-    );
-    newDays = days.map((dayData: {day: number}) => {
-      return {
-        ...dayData,
-        data: filteredTasks.filter(
-          task =>
-            parseInt(moment(task.selectedDate).format('DD')) === dayData.day,
-        ),
-      };
-    });
-    setDays(newDays);
-  }, [tasks]);
-
-  useEffect(() => {
     let array = [];
     for (let index = 1; index <= moment().daysInMonth(); index++) {
       const newDay = moment(`MMMM ${month} ${index - 1}`);
       array.push({weekDay: newDay.format('ddd'), day: index, data: []});
     }
+    const filteredTasks = taskList.filter(
+      (task: ITask) =>
+        moment(task.selectedDate).format('YYYY') === '2023' &&
+        moment(task.selectedDate).format('MMMM') === month,
+    );
+    array = array.map((dayData: {day: number}) => {
+      return {
+        ...dayData,
+        data: filteredTasks.filter(
+          (task: ITask) =>
+            parseInt(moment(task.selectedDate).format('DD'), 10) ===
+            dayData.day,
+        ),
+      };
+    });
     setDays(array);
-  }, [month]);
+  }, [month, taskList]);
 
-  const handleSelectDate = async ({
-    nativeEvent,
-  }: {
-    nativeEvent: any;
-    type: any;
-  }) => {
+  const handleSelectDate = async ({nativeEvent}: {nativeEvent: any}) => {
     setPickDate(false);
     let selectedTimeStamp = new Date(nativeEvent.timestamp);
-    console.log('selectedTimeStamp', selectedTimeStamp);
     setSelectedTaskObj({
       ...defaultTaskObj,
       selectedDate: moment(selectedTimeStamp).format(),
@@ -116,7 +109,6 @@ export const CalendarScreen: FC<any> = () => {
   };
 
   const handleUpdateTask = (task: any) => {
-    console.log('update task tıklandııı');
     setSelectedTaskObj(task);
     setModalVisible(true);
   };
@@ -127,8 +119,7 @@ export const CalendarScreen: FC<any> = () => {
     return (
       <Timeline
         data={data}
-        updateTask={(task, taskIndex) => {
-          console.log('test', task, taskIndex);
+        updateTask={task => {
           return handleUpdateTask(task);
         }}
       />
@@ -143,7 +134,7 @@ export const CalendarScreen: FC<any> = () => {
             <View style={styles.headerIconCover}>
               <Image
                 source={require('../../assets/calendar7.jpeg')}
-                style={{width: 32, height: 32}}
+                style={styles.headerIconCoverImg}
               />
             </View>
             <View style={styles.headerMonthPicker}>
@@ -153,9 +144,8 @@ export const CalendarScreen: FC<any> = () => {
 
           <FlatList
             horizontal
-            data={days} // anlamadım
+            data={days}
             ref={timelineHeader}
-            // scrollToOffset={TimelineHeader}
             scrollEnabled={false}
             renderItem={TimelineHeader}
             keyExtractor={item => 'TimelineHeader' + item.day.toString()}
@@ -190,10 +180,10 @@ export const CalendarScreen: FC<any> = () => {
             onBackClose={handleModalHidden}
             taskObj={selectedTaskObj}
             onAddTask={(taskObject: any) => {
-              let isExistTask = tasks.some(t => t.taskID === taskObject.taskID);
-              console.log('isExistTask: ', isExistTask);
-              const lastElementId = tasks[tasks.length - 1]?.taskID;
-              console.log('last', lastElementId);
+              let isExistTask = taskList.some(
+                (t: {taskID: any}) => t.taskID === taskObject.taskID,
+              );
+              const lastElementId = taskList[taskList.length - 1]?.taskID;
               if (isExistTask) {
                 const newTask = tasks.map(task => {
                   if (task.taskID === taskObject.taskID) {
@@ -209,18 +199,6 @@ export const CalendarScreen: FC<any> = () => {
                 });
                 setTasks(newTask);
               } else {
-                setTasks([
-                  ...tasks,
-                  {
-                    selectedDate: taskObject.selectedDate,
-                    taskID: lastElementId >= 0 ? lastElementId + 1 : 1,
-                    startTime: taskObject.startTime,
-                    endTime: taskObject.endTime,
-                    title: taskObject.title,
-                    task: taskObject.task,
-                  },
-                ]);
-                console.log('test123');
                 dispatch(
                   addTask({
                     selectedDate: taskObject.selectedDate,
@@ -253,6 +231,7 @@ export const CalendarScreen: FC<any> = () => {
                     mode="date"
                     locale="en"
                     onChange={handleSelectDate}
+                    minimumDate={new Date()}
                   />
                 ) : null}
               </View>

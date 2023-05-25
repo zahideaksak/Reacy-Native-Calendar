@@ -2,6 +2,8 @@ import React, {FC} from 'react';
 import {View, Text, TouchableOpacity} from 'react-native';
 import hourList from '../../assets/hourList';
 import {styles} from './styled';
+import {useDispatch} from 'react-redux';
+import {deleteTask} from '../../redux/reducers';
 
 interface Props {
   data: any;
@@ -9,13 +11,13 @@ interface Props {
 }
 
 const Timeline: FC<Props> = ({data, updateTask}) => {
+  const dispatch = useDispatch();
   const plotTask = (task: any, idx: any) => {
     const {height, translateY} = calculateData(task);
-    console.log('task', task);
     return (
       <TouchableOpacity
         onPress={() => updateTask(task, idx)}
-        onLongPress={() => console.log('uzun tıklandı')}
+        onLongPress={() => dispatch(deleteTask({id: task.taskID}))}
         key={task.title}
         style={[
           styles.task,

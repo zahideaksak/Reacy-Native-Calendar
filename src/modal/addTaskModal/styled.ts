@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FAFAFA',
     borderTopLeftRadius: 15,
     borderTopRightRadius: 15,
-    paddingTop: 12,
+    paddingTop: 14,
     paddingLeft: 10,
     borderBottomColor: '#C8C8C8',
     borderBottomWidth: 1.5,
@@ -29,7 +29,7 @@ export const styles = StyleSheet.create({
     textAlign: 'left',
     fontSize: 20,
     fontWeight: 'bold',
-    marginBottom: 8,
+    marginBottom: 12,
     marginLeft: 2,
   },
   timeBtn: {
@@ -115,6 +115,9 @@ export const styles = StyleSheet.create({
     marginLeft: 8,
     color: '#E74C3C',
     fontSize: 12,
+  },
+  errorView: {
+    paddingTop: 10,
   },
   micButtonView: {
     width: 50,
