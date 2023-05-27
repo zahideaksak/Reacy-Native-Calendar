@@ -1,6 +1,6 @@
 import {configureStore, combineReducers} from '@reduxjs/toolkit';
 import thunk from 'redux-thunk';
-import taskReducer from '../reducers';
+import taskReducer from '../reducers/task';
 import {persistReducer} from 'redux-persist';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 

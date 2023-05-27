@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react-native/no-inline-styles */
 import React, {FC, useState, useEffect} from 'react';
 import {
@@ -8,8 +7,6 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
-  Dimensions,
-  Alert,
 } from 'react-native';
 import Modal from 'react-native-modal';
 import {styles} from './styled';
@@ -17,16 +14,14 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import Voice from '@react-native-community/voice';
 import moment from 'moment';
 import {format} from 'date-fns';
-import {ITask} from '../../models/index';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-const {height} = Dimensions.get('window');
+import {ITask} from '../../models';
 
 interface IModalProps {
   isVisible: boolean;
-  onAddTask: (task: object) => void;
+  onAddTask: (task: ITask) => void;
   taskObj: ITask;
   onBackClose: () => void;
-  selectedDate: any;
+  selectedDate: string | undefined;
 }
 
 export const AddTaskModal: FC<IModalProps> = ({
@@ -62,7 +57,6 @@ export const AddTaskModal: FC<IModalProps> = ({
     ) {
       onAddTask(taskObject);
     }
-    //AsyncStorage.clear();
   };
   const [isStartTimePickerVisible, setStartTimePickerVisibility] =
     useState(false);
@@ -76,6 +70,7 @@ export const AddTaskModal: FC<IModalProps> = ({
   };
   const handleConfirmStartTime = (time: any) => {
     const dt = new Date(time);
+    console.log('dt: ', dt);
     if (dt.getMinutes() % 15 !== 0) {
       const roundedMinutes = Math.ceil(dt.getMinutes() / 15) * 15;
       dt.setMinutes(roundedMinutes);
@@ -101,14 +96,11 @@ export const AddTaskModal: FC<IModalProps> = ({
       dt.setMinutes(dt.getMinutes() + 15);
     }
     var formattedDate = format(dt, 'H:mm');
-    if (formattedDate > startTime) {
-      setTaskObject({...taskObject, endTime: formattedDate});
-    } else {
-      Alert.alert('"Oops! End time cannot be less than start time."');
-    }
+    setTaskObject({...taskObject, endTime: formattedDate});
     hideEndTimePicker();
   };
   //speech recognizition
+  const [result, setResult] = useState('');
   const [isRecording, setIsRecording] = useState(false);
 
   useEffect(() => {
@@ -120,18 +112,25 @@ export const AddTaskModal: FC<IModalProps> = ({
     };
   }, []);
 
-  const speechStartHandler = (e: any) => {
-    console.log('speechStart successful', e);
-  };
+  useEffect(() => {
+    if (result.length > 0) {
+      setTaskObject({...taskObject, task: result});
+    }
+  }, [result]);
 
+  const speechStartHandler = (e: any) => {
+    setIsRecording(true);
+    console.log('start handler==>>>', e);
+  };
   const speechEndHandler = (e: any) => {
     setIsRecording(false);
     console.log('stop handler', e);
   };
 
   const speechResultsHandler = (e: any) => {
-    const text = e.value[0];
-    setTaskObject({...taskObject, task: text});
+    let text = e.value[0];
+    setResult(text);
+    console.log('speech result handler', e);
   };
 
   const startRecording = async () => {
@@ -139,16 +138,14 @@ export const AddTaskModal: FC<IModalProps> = ({
     try {
       await Voice.start('tr-TR');
     } catch (error) {
-      console.log('error', error);
+      console.log('error raised', error);
     }
   };
-
   const stopRecording = async () => {
     try {
       await Voice.stop();
-      setIsRecording(false);
     } catch (error) {
-      console.log('error', error);
+      console.log('error raised', error);
     }
   };
 
@@ -157,16 +154,7 @@ export const AddTaskModal: FC<IModalProps> = ({
       isVisible={isVisible}
       style={styles.modalContainer}
       onBackdropPress={() => onBackClose()}>
-      <View
-        style={[
-          styles.container,
-          {
-            height:
-              errorStartTime || errorEndTime || errorTitle || errorTask
-                ? height / 1.7
-                : height / 2,
-          },
-        ]}>
+      <View style={styles.container}>
         <View style={styles.innerContainer}>
           <Text style={styles.title}>
             {taskObject.taskID === 0 ? 'Create Task' : 'Update Task'} |{' '}
@@ -232,6 +220,7 @@ export const AddTaskModal: FC<IModalProps> = ({
               placeholder="Task..."
               placeholderTextColor="#777"
               onChangeText={val => {
+                console.log('123');
                 setErrorTitle('');
                 setTaskObject({...taskObject, task: val});
               }}
@@ -248,11 +237,7 @@ export const AddTaskModal: FC<IModalProps> = ({
               </TouchableOpacity>
             </View>
           </View>
-          {errorTask && (
-            <>
-              <Text style={styles.errorText}>{errorTask}</Text>
-            </>
-          )}
+          {errorTask && <Text style={styles.errorText}>{errorTask}</Text>}
           <TouchableOpacity style={{marginBottom: 30}} onPress={handleAddTask}>
             <View style={styles.buttonContainer}>
               <Text style={styles.buttonPlaceHolder}>

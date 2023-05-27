@@ -20,7 +20,7 @@ import {icons} from '../../assets/icons';
 import moment from 'moment';
 import Timeline from '../../components/timeLine';
 import {useDispatch, useSelector} from 'react-redux';
-import {addTask} from '../../redux/reducers';
+import {addTask, updateTask} from '../../redux/reducers/task';
 import {RootState} from '../../redux/store';
 import {ITask} from '../../models';
 
@@ -35,7 +35,7 @@ interface Props {
 }
 
 export const CalendarScreen: FC<any> = () => {
-  const taskList = useSelector((state: RootState) => state.task);
+  const taskList = useSelector((state: RootState) => state.task.tasks);
   console.log('tasklist: ', taskList);
 
   const dispatch = useDispatch();
@@ -51,9 +51,11 @@ export const CalendarScreen: FC<any> = () => {
   const month = moment().format('MMMM');
   const [pickDate, setPickDate] = useState(false);
   const [selectedTaskObj, setSelectedTaskObj] = useState(defaultTaskObj);
+  console.log('selectedtask', selectedTaskObj);
+
   const [days, setDays] = useState<any>(calendarDummyDates);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [tasks, setTasks] = useState<any[]>([]);
+  // const [tasks, setTasks] = useState<any[]>([]);
 
   const handleModalHidden = () => {
     setModalVisible(false);
@@ -76,21 +78,26 @@ export const CalendarScreen: FC<any> = () => {
       const newDay = moment(`MMMM ${month} ${index - 1}`);
       array.push({weekDay: newDay.format('ddd'), day: index, data: []});
     }
-    const filteredTasks = taskList.filter(
-      (task: ITask) =>
-        moment(task.selectedDate).format('YYYY') === '2023' &&
-        moment(task.selectedDate).format('MMMM') === month,
-    );
-    array = array.map((dayData: {day: number}) => {
-      return {
-        ...dayData,
-        data: filteredTasks.filter(
-          (task: ITask) =>
-            parseInt(moment(task.selectedDate).format('DD'), 10) ===
-            dayData.day,
-        ),
-      };
-    });
+    if (taskList && taskList.length > 0) {
+      console.log('tasklist2:', taskList);
+
+      const filteredTasks = taskList.filter(
+        (task: ITask) =>
+          moment(task.selectedDate).format('YYYY') === '2023' &&
+          moment(task.selectedDate).format('MMMM') === month,
+      );
+      array = array.map((dayData: {day: number}) => {
+        return {
+          ...dayData,
+          data: filteredTasks.filter(
+            (task: ITask) =>
+              parseInt(moment(task.selectedDate).format('DD'), 10) ===
+              dayData.day,
+          ),
+        };
+      });
+    }
+
     setDays(array);
   }, [month, taskList]);
 
@@ -179,36 +186,48 @@ export const CalendarScreen: FC<any> = () => {
             selectedDate={selectedDate}
             onBackClose={handleModalHidden}
             taskObj={selectedTaskObj}
-            onAddTask={(taskObject: any) => {
-              let isExistTask = taskList.some(
-                (t: {taskID: any}) => t.taskID === taskObject.taskID,
-              );
+            onAddTask={(taskObject: ITask) => {
+              // console.log('asd', taskList);
+              // dispatch(
+              //   addTask({
+              //     selectedDate: taskObject.selectedDate,
+              //     taskID: 1,
+              //     startTime: taskObject.startTime,
+              //     endTime: taskObject.endTime,
+              //     title: taskObject.title,
+              //     task: taskObject.task,
+              //   }),
+              // );
+              let isExistTask =
+                taskObject.taskID !== 0 &&
+                taskList.filter((t: ITask) => t.taskID === taskObject.taskID);
+              console.log('isexisttask:', isExistTask);
+
               const lastElementId = taskList[taskList.length - 1]?.taskID;
               if (isExistTask) {
-                const newTask = tasks.map(task => {
-                  if (task.taskID === taskObject.taskID) {
-                    return {
-                      ...task,
-                      startTime: taskObject.startTime,
-                      endTime: taskObject.endTime,
-                      title: taskObject.title,
-                      task: taskObject.task,
-                    };
-                  }
-                  return task;
-                });
-                setTasks(newTask);
-              } else {
                 dispatch(
-                  addTask({
+                  updateTask({
                     selectedDate: taskObject.selectedDate,
-                    taskID: lastElementId >= 0 ? lastElementId + 1 : 1,
+                    taskID: taskObject.taskID,
                     startTime: taskObject.startTime,
                     endTime: taskObject.endTime,
                     title: taskObject.title,
                     task: taskObject.task,
                   }),
                 );
+                console.log('update task düzenle');
+              } else {
+                dispatch(
+                  addTask({
+                    selectedDate: taskObject.selectedDate,
+                    taskID: lastElementId + 1,
+                    startTime: taskObject.startTime,
+                    endTime: taskObject.endTime,
+                    title: taskObject.title,
+                    task: taskObject.task,
+                  }),
+                );
+                console.log('update task düzenle');
               }
               setSelectedTaskObj(defaultTaskObj);
               setModalVisible(false);

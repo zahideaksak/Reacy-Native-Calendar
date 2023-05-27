@@ -7,7 +7,8 @@ export const styles = StyleSheet.create({
     margin: 0,
   },
   scrollView: {
-    padding: 16,
+    paddingHorizontal: 16,
+    paddingTop: 10,
   },
   container: {
     backgroundColor: '#F1F1F1',

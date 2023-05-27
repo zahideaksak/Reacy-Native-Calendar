@@ -3,7 +3,7 @@ import {View, Text, TouchableOpacity} from 'react-native';
 import hourList from '../../assets/hourList';
 import {styles} from './styled';
 import {useDispatch} from 'react-redux';
-import {deleteTask} from '../../redux/reducers';
+import {deleteTask} from '../../redux/reducers/task';
 
 interface Props {
   data: any;
