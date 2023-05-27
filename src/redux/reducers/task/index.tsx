@@ -24,16 +24,16 @@ const taskSlice = createSlice({
       state.tasks = [...state.tasks, action.payload];
       // state.push(action.payload);
     },
-    deleteTask: (state, action: PayloadAction<{id: number}>) => {
-      //console.log('delete: ', current(state), action);
-      // const taskWithIdIndex = current(state).findIndex(
-      //   (task: ITask) => task.taskID === action.payload.id,
-      // );
-      // if (taskWithIdIndex > -1) {
-      //   state.splice(taskWithIdIndex, 1);
-      // }
-      // return state;
-    },
+    // deleteTask: (state, action: PayloadAction<{id: number}>) => {
+    //   //console.log('delete: ', current(state), action);
+    //   // const taskWithIdIndex = current(state).findIndex(
+    //   //   (task: ITask) => task.taskID === action.payload.id,
+    //   // );
+    //   // if (taskWithIdIndex > -1) {
+    //   //   state.splice(taskWithIdIndex, 1);
+    //   // }
+    //   // return state;
+    // },
     updateTask: (state = initialState, action: PayloadAction<any>) => {
       console.log('update', state, action);
       // current(state).map((task: ITask, index: number) => {

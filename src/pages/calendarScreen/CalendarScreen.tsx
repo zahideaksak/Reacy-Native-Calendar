@@ -187,17 +187,6 @@ export const CalendarScreen: FC<any> = () => {
             onBackClose={handleModalHidden}
             taskObj={selectedTaskObj}
             onAddTask={(taskObject: ITask) => {
-              // console.log('asd', taskList);
-              // dispatch(
-              //   addTask({
-              //     selectedDate: taskObject.selectedDate,
-              //     taskID: 1,
-              //     startTime: taskObject.startTime,
-              //     endTime: taskObject.endTime,
-              //     title: taskObject.title,
-              //     task: taskObject.task,
-              //   }),
-              // );
               let isExistTask =
                 taskObject.taskID !== 0 &&
                 taskList.filter((t: ITask) => t.taskID === taskObject.taskID);
