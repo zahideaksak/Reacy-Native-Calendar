@@ -94,6 +94,10 @@ export const styles = StyleSheet.create({
   addBtnView: {
     position: 'relative',
   },
+  addImg: {
+    width: 35,
+    height: 35,
+  },
   dateTimePickerView: {
     opacity: 0,
     position: 'absolute',

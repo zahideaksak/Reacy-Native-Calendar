@@ -10,13 +10,11 @@ import {
 } from 'react-native';
 import {styles} from './styled';
 import hourList from '../../assets/hourList';
-import Icon from '../../components/icon';
 import calendarDummyDates from '../../assets/calendarDummyDates';
 import TimelineHeader from '../../components/timelineHeader';
 import RenderHour from '../../components/renderHour';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import {AddTaskModal} from '../../modal/addTaskModal';
-import {icons} from '../../assets/icons';
 import moment from 'moment';
 import Timeline from '../../components/timeLine';
 import {useDispatch, useSelector} from 'react-redux';
@@ -28,16 +26,15 @@ const timelineHeight = hourList.length * 41;
 const today = new Date();
 interface Props {
   item: {
-    day: any;
-    data: any[];
+    day: number;
+    data: object[];
   };
   index: number;
 }
 
-export const CalendarScreen: FC<any> = () => {
+export const CalendarScreen: FC<ITask> = () => {
   const taskList = useSelector((state: RootState) => state.task.tasks);
   console.log('tasklist: ', taskList);
-
   const dispatch = useDispatch();
   const defaultTaskObj = {
     selectedDate: '',
@@ -51,11 +48,8 @@ export const CalendarScreen: FC<any> = () => {
   const month = moment().format('MMMM');
   const [pickDate, setPickDate] = useState(false);
   const [selectedTaskObj, setSelectedTaskObj] = useState(defaultTaskObj);
-  console.log('selectedtask', selectedTaskObj);
-
   const [days, setDays] = useState<any>(calendarDummyDates);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
-  // const [tasks, setTasks] = useState<any[]>([]);
 
   const handleModalHidden = () => {
     setModalVisible(false);
@@ -79,8 +73,6 @@ export const CalendarScreen: FC<any> = () => {
       array.push({weekDay: newDay.format('ddd'), day: index, data: []});
     }
     if (taskList && taskList.length > 0) {
-      console.log('tasklist2:', taskList);
-
       const filteredTasks = taskList.filter(
         (task: ITask) =>
           moment(task.selectedDate).format('YYYY') === '2023' &&
@@ -97,7 +89,6 @@ export const CalendarScreen: FC<any> = () => {
         };
       });
     }
-
     setDays(array);
   }, [month, taskList]);
 
@@ -110,17 +101,13 @@ export const CalendarScreen: FC<any> = () => {
     });
     setModalVisible(true);
   };
-
   const handleAdd = () => {
     setPickDate(true);
   };
-
   const handleUpdateTask = (task: any) => {
     setSelectedTaskObj(task);
     setModalVisible(true);
   };
-
-  // const addTask = () => {};
 
   const renderTimelineContent: FC<Props> = ({item: {data}}) => {
     return (
@@ -140,7 +127,7 @@ export const CalendarScreen: FC<any> = () => {
           <View style={styles.headerTopRowHeader}>
             <View style={styles.headerIconCover}>
               <Image
-                source={require('../../assets/calendar7.jpeg')}
+                source={require('../../assets/images/calendar7.jpeg')}
                 style={styles.headerIconCoverImg}
               />
             </View>
@@ -148,7 +135,6 @@ export const CalendarScreen: FC<any> = () => {
               <Text style={styles.headerMonthPickerTxt}>{month}</Text>
             </View>
           </View>
-
           <FlatList
             horizontal
             data={days}
@@ -179,7 +165,6 @@ export const CalendarScreen: FC<any> = () => {
             </View>
           </View>
         </ScrollView>
-
         {selectedTaskObj.selectedDate !== '' && (
           <AddTaskModal
             isVisible={modalVisible}
@@ -190,8 +175,6 @@ export const CalendarScreen: FC<any> = () => {
               let isExistTask =
                 taskObject.taskID !== 0 &&
                 taskList.filter((t: ITask) => t.taskID === taskObject.taskID);
-              console.log('isexisttask:', isExistTask);
-
               const lastElementId = taskList[taskList.length - 1]?.taskID;
               if (isExistTask) {
                 dispatch(
@@ -223,12 +206,14 @@ export const CalendarScreen: FC<any> = () => {
             }}
           />
         )}
-
         <View style={styles.addBtnMain}>
           <View>
             <View style={styles.addBtnView}>
               <TouchableOpacity onPress={handleAdd}>
-                <Icon name="add" path={icons.add} color={'default'} size={35} />
+                <Image
+                  source={require('../../assets/images/add.png')}
+                  style={styles.addImg}
+                />
               </TouchableOpacity>
               <View style={styles.dateTimePickerView}>
                 {pickDate ? (

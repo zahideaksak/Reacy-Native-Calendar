@@ -23,7 +23,6 @@ interface IModalProps {
   onBackClose: () => void;
   selectedDate: string | undefined;
 }
-
 export const AddTaskModal: FC<IModalProps> = ({
   isVisible,
   taskObj,
@@ -231,7 +230,7 @@ export const AddTaskModal: FC<IModalProps> = ({
               <TouchableOpacity
                 onPress={isRecording ? stopRecording : startRecording}>
                 <Image
-                  source={require('../../assets/mic.png')}
+                  source={require('../../assets/images/mic.png')}
                   style={styles.micImage}
                 />
               </TouchableOpacity>

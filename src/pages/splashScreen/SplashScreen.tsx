@@ -10,7 +10,7 @@ export const SplashScreen: FC<any> = ({navigation}) => {
     <View style={styles.container}>
       <Text style={styles.textTitle}>Smart Agenda</Text>
       <Image
-        source={require('../../assets/agenda8.jpg')}
+        source={require('../../assets/images/agenda8.jpg')}
         style={styles.image}
       />
       <Text style={styles.text1}>Plan your schedules easily.</Text>

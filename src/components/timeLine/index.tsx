@@ -41,7 +41,6 @@ const Timeline: FC<Props> = ({data, updateTask}) => {
         <View style={styles.hour} />
       ))}
       {data.map((task: any, idx: any) => plotTask(task, idx))}
-      {/* ??? */}
     </View>
   );
 };

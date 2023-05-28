@@ -1,8 +1,8 @@
 export declare class ITask {
   selectedDate: string;
   taskID: number;
-  startTime: any;
-  endTime: any;
+  startTime: string;
+  endTime: string;
   title: string;
   task: string;
 }
