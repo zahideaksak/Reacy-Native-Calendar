@@ -187,7 +187,6 @@ export const CalendarScreen: FC<ITask> = () => {
                     task: taskObject.task,
                   }),
                 );
-                console.log('update task düzenle');
               } else {
                 dispatch(
                   addTask({
@@ -199,7 +198,6 @@ export const CalendarScreen: FC<ITask> = () => {
                     task: taskObject.task,
                   }),
                 );
-                console.log('update task düzenle');
               }
               setSelectedTaskObj(defaultTaskObj);
               setModalVisible(false);

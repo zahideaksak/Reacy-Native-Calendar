@@ -69,7 +69,6 @@ export const AddTaskModal: FC<IModalProps> = ({
   };
   const handleConfirmStartTime = (time: any) => {
     const dt = new Date(time);
-    console.log('dt: ', dt);
     if (dt.getMinutes() % 15 !== 0) {
       const roundedMinutes = Math.ceil(dt.getMinutes() / 15) * 15;
       dt.setMinutes(roundedMinutes);
@@ -91,10 +90,10 @@ export const AddTaskModal: FC<IModalProps> = ({
       const roundedMinutes = Math.ceil(dt.getMinutes() / 15) * 15;
       dt.setMinutes(roundedMinutes);
     }
-    if (startTime === format(dt, 'H:mm')) {
+    if (startTime === format(dt, 'HH:mm')) {
       dt.setMinutes(dt.getMinutes() + 15);
     }
-    var formattedDate = format(dt, 'H:mm');
+    var formattedDate = format(dt, 'HH:mm');
     setTaskObject({...taskObject, endTime: formattedDate});
     hideEndTimePicker();
   };
@@ -174,7 +173,6 @@ export const AddTaskModal: FC<IModalProps> = ({
               onConfirm={handleConfirmStartTime}
               onCancel={hideStartTimePicker}
               date={new Date()}
-              minimumDate={new Date()}
               minuteInterval={15}
             />
             {errorStartTime && (
@@ -192,9 +190,6 @@ export const AddTaskModal: FC<IModalProps> = ({
               onConfirm={handleConfirmEndTime}
               onCancel={hideEndTimePicker}
               date={new Date()}
-              minimumDate={
-                new Date(new Date().setMinutes(new Date().getMinutes() + 15))
-              }
               minuteInterval={15}
             />
             {errorEndTime && (

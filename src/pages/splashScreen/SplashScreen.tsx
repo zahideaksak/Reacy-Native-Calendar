@@ -5,12 +5,12 @@ import {styles} from './styled';
 export const SplashScreen: FC<any> = ({navigation}) => {
   setTimeout(() => {
     navigation.navigate('CalendarScreen');
-  }, 1000);
+  }, 5000);
   return (
     <View style={styles.container}>
       <Text style={styles.textTitle}>Smart Agenda</Text>
       <Image
-        source={require('../../assets/images/agenda8.jpg')}
+        source={require('../../assets/images/site-agenda.png')}
         style={styles.image}
       />
       <Text style={styles.text1}>Plan your schedules easily.</Text>

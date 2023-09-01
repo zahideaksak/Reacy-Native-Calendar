@@ -62,7 +62,7 @@ export const styles = StyleSheet.create({
   headerTopRowHeader: {
     flexDirection: 'row',
     height: 50,
-    width: 100,
+    width: 120,
   },
   headerIconCover: {
     width: 50,
@@ -82,9 +82,10 @@ export const styles = StyleSheet.create({
   },
   headerMonthPickerTxt: {
     fontSize: 20,
-    fontWeight: '400',
+    fontWeight: '500',
     marginHorizontal: 5,
     color: theme.fgColor,
+    fontFamily: 'Lora-Bold',
   },
   contentContainerStyle: {
     paddingLeft: 50,

@@ -14,13 +14,6 @@ const taskSlice = createSlice({
       state.tasks = [...state.tasks, action.payload];
     },
     deleteTask: (state, action: PayloadAction<{id: number}>) => {
-      // const taskWithIdIndex = current(state).findIndex(
-      //   (task: ITask) => task.taskID === action.payload.id,
-      // );
-      // if (taskWithIdIndex > -1) {
-      //   state.splice(taskWithIdIndex, 1);
-      // }
-      // return state;
       const taskWithIdIndex = state.tasks.findIndex(
         (task: ITask) => task.taskID === action.payload.id,
       );
