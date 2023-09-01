@@ -12,13 +12,20 @@ In this project, a Smart Organizer mobile application was created using the Reac
 
 ## Screenshots
 
+<!-- <p align="center"><img src="./src/assets/images/splash.png" width="400" /> </p>
+<p align="center"><img src="./src/assets/home1.png" width="400"/>
+<img src="./src/assets/home2.png" width="400"/> </p>
+<p align="center"><img src="./src/assets/calendarr.png" width="400"/>
+<img src="./src/assets/createTask.png" width="400"/> </p>
+<p align="center"><img src="./src/assets/updateTask.png" width="400" /> </p> -->
+
 <p align="center">
-<img src="./src/assets/splash.png" width="20%"/>
-<img src="./src/assets/home1.png" width="20%"/>
-<img src="./src/assets/home2.png" width="20%"/>
-<img src="./src/assets/calendar.png" width="20%"/>
-<img src="./src/assets/createTask.png" width="20%"/>
-<img src="./src/assets/updateTask.png" width="20%"/>
+<img src="./src/assets/images/splash.png" width="30%"/>
+<img src="./src/assets/images/home1.png" width="30%"/>
+<img src="./src/assets/images/home2.png" width="30%"/>
+<img src="./src/assets/images/calendarr.png" width="30%"/>
+<img src="./src/assets/images/createTask.png" width="30%"/>
+<img src="./src/assets/images/updateTask.png" width="30%"/>
 
 </p>
 
@@ -29,13 +36,6 @@ In this project, a Smart Organizer mobile application was created using the Reac
 - "@react-native-async-storage/async-storage"
 - "@react-native-community/datetimepicker"
 - "@react-native-community/voice"
+- "react-native-vector-icons"
 - "redux-persist"
 - "react-redux"
-
-<!--
-<p align="center"><img src="./src/assets/splash.png" width="400" /> </p>
-<p align="center"><img src="./src/assets/home1.png" width="400"/>
-<img src="./src/assets/home2.png" width="400"/> </p>
-<p align="center"><img src="./src/assets/calendar.png" width="400"/>
-<img src="./src/assets/createTask.png" width="400"/> </p>
-<p align="center"><img src="./src/assets/updateTask.png" width="400" /> </p> -->
